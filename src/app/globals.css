@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0d1117;
+  --foreground: #e6edf3;
 }
 
 @theme inline {
@@ -12,15 +12,65 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
+
+/* ── Pure CSS animations (non-JS) ── */
+@keyframes spinSlow {
+  to { transform: rotate(360deg); }
+}
+@keyframes spinRev {
+  to { transform: rotate(-360deg); }
+}
+@keyframes floatA {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-11px); }
+}
+@keyframes floatB {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes floatC {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-13px); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+@keyframes scrollWheel {
+  0%   { transform: translateY(0);    opacity: 1; }
+  80%  { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 0; }
+}
+@keyframes hirePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,211,238,0.5); }
+  50%       { box-shadow: 0 0 0 10px rgba(34,211,238,0); }
+}
+@keyframes gridFade {
+  from { opacity: 0; }
+  to   { opacity: 0.13; }
+}
+
+.spin-slow   { animation: spinSlow 18s linear infinite; }
+.spin-rev    { animation: spinRev 30s linear infinite; }
+.float-a     { animation: floatA 3.2s ease-in-out infinite; }
+.float-b     { animation: floatB 3.8s ease-in-out infinite; }
+.float-b-d05 { animation: floatB 3.6s ease-in-out 1.4s infinite; }
+.float-c     { animation: floatC 4s ease-in-out infinite; }
+.float-a-d08 { animation: floatA 3.5s ease-in-out 0.8s infinite; }
+.float-b-d05s{ animation: floatB 3.8s ease-in-out 0.5s infinite; }
+.float-c-d03 { animation: floatC 3.4s ease-in-out 0.3s infinite; }
+.float-c-d1  { animation: floatC 4s ease-in-out 1s infinite; }
+.blink        { animation: blink 1.1s step-end infinite; }
+.pulse-dot    { animation: pulseDot 2s ease-in-out infinite; }
+.scroll-wheel { animation: scrollWheel 1.6s ease-in-out infinite; }
+.hire-pulse   { animation: hirePulse 2.4s ease-in-out infinite; }
+.grid-fade    { animation: gridFade 1.2s ease forwards; }
