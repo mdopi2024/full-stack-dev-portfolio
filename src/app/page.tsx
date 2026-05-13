@@ -1,11 +1,11 @@
-import About from '@/components/About'
+import AboutMe from '@/components/AboutMe'
 import HeroSection from '@/components/HeroSection'
 
 export default function page() {
     return (
         <>
             <HeroSection />
-            <About />
+            <AboutMe />
         </>
     )
 }

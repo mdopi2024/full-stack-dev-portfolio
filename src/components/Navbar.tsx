@@ -6,10 +6,10 @@ import { motion, AnimatePresence, type Transition } from "framer-motion";
 
 const LINKS: { label: string; href: string }[] = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Projects", href: "/projects" },
-    { label: "Contact", href: "/contact" },
+    { label: "About", href: "#1" },
+    { label: "Services", href: "#2" },
+    { label: "Projects", href: "#3" },
+    { label: "Contact", href: "#4" },
 ];
 
 const slideDown = {

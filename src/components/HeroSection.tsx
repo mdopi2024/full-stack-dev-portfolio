@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, type Transition } from "framer-motion";
+import { downloadResume } from "@/utils/resume";
 
 /* ── Framer Motion entrance helpers ── */
 const up = (delay = 0) => ({
@@ -226,7 +227,7 @@ export default function HeroSection() {
 
                     {/* Typewriter name */}
                     <motion.div {...up(0.72)}
-                        className="mb-5 min-h-[1.1em] text-[clamp(32px,5vw,40px)] font-extrabold leading-none tracking-tight"
+                        className="mb-5 min-h-[1.1em] text-[clamp(32px,5vw,45px)] font-extrabold leading-none tracking-tight"
                         style={{ fontFamily: "var(--font-syne)" }}
                     >
                         <span className="text-[#8b949e]">{w1}</span>
@@ -273,12 +274,13 @@ export default function HeroSection() {
                             View Projects
                         </motion.button>
                         <motion.button
+                            onClick={downloadResume}
                             whileHover={{ y: -2, borderColor: "#22d3ee", color: "#22d3ee" }}
                             transition={{ duration: 0.18 }}
                             className="flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[8px] bg-transparent px-6 py-[13px] text-[14px] text-[#e6edf3] transition-colors duration-200"
                             style={{ border: "0.5px solid #30363d", fontFamily: "var(--font-dm-sans)" }}
                         >
-                            Download CV
+                            Download Resume
                             <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <path d="M12 5v14M5 12l7 7 7-7" />
                             </svg>
