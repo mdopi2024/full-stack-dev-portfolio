@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
-/* ---------------- OFFICIAL ICONS ---------------- */
+/* ---------------- ICONS ---------------- */
 import {
     SiHtml5,
     SiCss,
@@ -38,8 +38,8 @@ const skills = [
     { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
 ];
 
-/* animation */
-const container = {
+/* ---------------- ANIMATION (FIXED) ---------------- */
+const container: Variants = {
     hidden: { opacity: 0 },
     show: {
         opacity: 1,
@@ -49,13 +49,16 @@ const container = {
     },
 };
 
-const item = {
+const item: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.9 },
     show: {
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: { duration: 0.4, ease: "easeOut" },
+        transition: {
+            duration: 0.4,
+            ease: [0.25, 0.8, 0.25, 1], // ✅ FIXED TYPE ERROR
+        },
     },
 };
 
@@ -63,9 +66,9 @@ export default function SkillsSection() {
     return (
         <section
             id="skills"
-            className="relative w-full py-10 bg-[#0d1117] text-white overflow-hidden"
+            className="relative w-full py-16 bg-[#0d1117] text-white overflow-hidden"
         >
-            {/* glow */}
+            {/* glow background */}
             <div className="absolute inset-0">
                 <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full" />
                 <div className="absolute bottom-0 right-10 w-[300px] h-[300px] bg-cyan-400/10 blur-[120px] rounded-full" />
@@ -92,13 +95,13 @@ export default function SkillsSection() {
                     Technologies I use to build modern, scalable and high-performance web applications.
                 </motion.p>
 
-                {/* grid */}
+                {/* skills grid */}
                 <motion.div
                     variants={container}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
+                    className="mt-12  grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
                 >
                     {skills.map((skill, i) => {
                         const Icon = skill.icon;
@@ -109,9 +112,9 @@ export default function SkillsSection() {
                                 variants={item}
                                 whileHover={{
                                     scale: 1.08,
-                                    boxShadow: "0px 0px 20px rgba(34,211,238,0.25)",
+                                    boxShadow: "0px 0px 25px rgba(34,211,238,0.25)",
                                 }}
-                                className="flex items-center justify-center gap-2 cursor-default rounded-xl border border-cyan-500/10 bg-[#161b22] px-4 py-3 text-center text-sm md:text-base text-gray-300 hover:text-cyan-300 transition"
+                                className="flex  items-center justify-center gap-3 cursor-default rounded-xl border border-cyan-500/10 bg-[#161b22] px-4 py-2.5 text-sm text-gray-300 hover:text-cyan-300 transition text-center"
                             >
                                 <Icon size={20} style={{ color: skill.color }} />
                                 <span>{skill.name}</span>
