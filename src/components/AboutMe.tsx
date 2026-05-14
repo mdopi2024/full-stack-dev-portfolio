@@ -7,7 +7,7 @@ const AboutMe = () => {
     return (
         <section
             id="about"
-            className="relative w-full py-24 text-white overflow-hidden "
+            className="relative w-full pt-12 text-white overflow-hidden"
         >
             {/* background glow */}
             <div className="absolute inset-0">
@@ -58,21 +58,27 @@ const AboutMe = () => {
                         className="space-y-5"
                     >
                         <p className="text-gray-300 leading-relaxed text-base md:text-lg">
-                            I am a <span className="text-cyan-400">Full Stack Developer </span>
-                            passionate about building scalable, high-performance web applications
-                            using <span className="text-cyan-400">React</span>,{" "}
-                            <span className="text-cyan-400">Next.js</span>, and modern backend technologies.
+                            I am a <span className="text-cyan-400 font-medium">Full Stack Developer</span>{" "}
+                            specializing in building modern, scalable, and high-performance web applications.
+                            I work across both frontend and backend to deliver complete end-to-end solutions.
                         </p>
 
                         <p className="text-gray-400 leading-relaxed">
-                            I work on both frontend and backend systems, building clean user interfaces,
-                            efficient APIs, and well-structured databases. My focus is on delivering
-                            complete end-to-end web solutions.
+                            On the frontend, I build responsive and interactive user interfaces using{" "}
+                            <span className="text-cyan-400">React</span> and{" "}
+                            <span className="text-cyan-400">Next.js</span>. On the backend, I develop secure
+                            and efficient APIs using Node.js and modern backend practices.
                         </p>
 
                         <p className="text-gray-400 leading-relaxed">
-                            Currently, I am working on MERN stack projects and continuously improving my
-                            skills in scalable architecture, performance optimization, and modern web development.
+                            I also work with databases and ORMs like{" "}
+                            <span className="text-cyan-400">Prisma</span> and MongoDB, PostgreSQL, Golang to ensure clean data flow.
+                            My focus is on performance, clean architecture, and building production-ready applications.
+                        </p>
+
+                        <p className="text-gray-400 leading-relaxed">
+                            Currently, I am continuously improving my skills in system design, backend scalability,
+                            and modern full-stack development practices.
                         </p>
                     </motion.div>
 
