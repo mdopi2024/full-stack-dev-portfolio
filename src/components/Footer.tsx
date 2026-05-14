@@ -38,14 +38,24 @@ export default function Footer() {
                     {/* links */}
                     <div>
                         <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+
                         <ul className="space-y-2 text-gray-400 text-sm">
-                            {["Home", "About", "Skills", "Projects", "Contact"].map((item) => (
-                                <li key={item}>
+                            {[
+                                { name: "Home", href: "/" },
+                                { name: "About", href: "/about" },
+                                { name: "Skills", href: "#skills" },
+                                { name: "Projects", href: "#projects" },
+                                { name: "Contact", href: "#contact" },
+                            ].map((item) => (
+                                <li key={item.name}>
                                     <Link
-                                        href={`#${item.toLowerCase()}`}
-                                        className="hover:text-cyan-300 transition"
+                                        href={item.href}
+                                        className="relative inline-block hover:text-cyan-300 transition group"
                                     >
-                                        {item}
+                                        <span>{item.name}</span>
+
+                                        {/* underline animation */}
+                                        <span className="absolute left-0 -bottom-1 h-[1px] w-0 bg-cyan-300 transition-all duration-300 group-hover:w-full" />
                                     </Link>
                                 </li>
                             ))}
