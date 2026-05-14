@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function Footer() {
     return (
-        <footer className="relative w-full bg-[#0d1117] text-white overflow-hidden border-t border-white/5">
+        <footer className="relative w-full bg-[#0d1117] text-white overflow-hidden border-t border-white/5 ">
 
             {/* glow background */}
             <div className="absolute inset-0 pointer-events-none">
