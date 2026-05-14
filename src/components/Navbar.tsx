@@ -1,166 +1,183 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence, type Transition } from "framer-motion";
 
-const LINKS: { label: string; href: string }[] = [
+// ─────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────
+interface NavLinkProps {
+    label: string;
+    href: string;
+    active: boolean;
+}
+
+interface HireBtnProps {
+    fullWidth?: boolean;
+}
+
+// ─────────────────────────────────────────────
+// Constants
+// ─────────────────────────────────────────────
+const LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "#1" },
     { label: "Services", href: "#2" },
     { label: "Projects", href: "#3" },
     { label: "Contact", href: "#4" },
-];
+] as const;
 
-const slideDown = {
-    initial: { y: -110, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] as const } satisfies Transition,
-};
-
+// ─────────────────────────────────────────────
+// Navbar
+// ─────────────────────────────────────────────
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
-        const fn = () => setScrolled(window.scrollY > 20);
-        window.addEventListener("scroll", fn);
-        return () => window.removeEventListener("scroll", fn);
+        const onScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
-    // Close mobile menu on route change
-    useEffect(() => {
-        setMenuOpen(false);
-    }, [pathname]);
+    useEffect(() => { setMenuOpen(false); }, [pathname]);
 
     return (
-        <motion.nav
-            {...slideDown}
-            className="fixed top-0 left-0 right-0 z-[100] backdrop-blur-[18px] transition-[background,border-color] duration-300"
-            style={{
-                background: scrolled ? "rgba(13,17,23,0.97)" : "rgba(13,17,23,0.80)",
-                borderBottom: `0.5px solid ${scrolled ? "#30363d" : "rgba(48,54,61,0.30)"}`,
-                fontFamily: "var(--font-dm-sans)",
-            }}
-        >
-            {/* ── Main row ── */}
-            <div className="flex h-16 items-center justify-between px-[clamp(20px,4vw,52px)]">
+        <>
+            {/* ── Keyframes injected once — no tailwind.config needed ── */}
+            <style>{KEYFRAMES}</style>
 
-                {/* Logo */}
-                <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.25, duration: 0.4 } satisfies Transition}
-                    className="shrink-0 select-none text-[clamp(15px,2.5vw,17px)] font-bold tracking-[0.01em] text-[#22d3ee]"
-                    style={{ fontFamily: "var(--font-syne)" }}
-                >
-                    <Link href="/" className="no-underline">
-                        &lt;<span className="text-[#e6edf3]">Opi</span>.<span className="text-[#f87171]">dev</span> /&gt;
-                    </Link>
-                </motion.div>
+            <nav
+                className={[
+                    "fixed inset-x-0 top-0 z-[100] backdrop-blur-2xl",
+                    "transition-[background,border-color,box-shadow] duration-300",
+                    "navbar-enter",
+                    scrolled
+                        ? "bg-[rgba(13,17,23,0.38)] border-b border-[rgba(255,255,255,0.10)] shadow-[0_8px_30px_rgba(0,0,0,0.16)]"
+                        : "bg-[rgba(13,17,23,0.12)] border-b border-[rgba(255,255,255,0.04)]",
+                ].join(" ")}
+            >
+                {/* ── Main row ── */}
+                <div className="flex h-16 items-center justify-between px-[clamp(20px,4vw,52px)]">
 
-                {/* Desktop nav links */}
-                <ul className="hidden list-none items-center gap-[clamp(18px,2.5vw,30px)] md:flex">
-                    {LINKS.map((link, i) => (
-                        <motion.li
-                            key={link.href}
-                            initial={{ opacity: 0, y: -8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.3 + i * 0.07, duration: 0.35 } satisfies Transition}
-                        >
-                            <NavLink
-                                label={link.label}
-                                href={link.href}
-                                active={pathname === link.href}
-                            />
-                        </motion.li>
-                    ))}
-                </ul>
-
-                {/* Desktop Hire Me */}
-                <motion.div
-                    initial={{ opacity: 0, x: 10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.55, duration: 0.4 } satisfies Transition}
-                    className="hidden md:block"
-                >
-                    <HireBtn />
-                </motion.div>
-
-                {/* Mobile hamburger */}
-                <button
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label="Toggle navigation menu"
-                    className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-1 md:hidden"
-                >
-                    {[0, 1, 2].map((n) => (
-                        <motion.span
-                            key={n}
-                            className="block h-[2px] w-[22px] rounded-[2px]"
-                            animate={
-                                menuOpen
-                                    ? n === 0 ? { rotate: 45, y: 7, backgroundColor: "#22d3ee" }
-                                        : n === 1 ? { opacity: 0 }
-                                            : { rotate: -45, y: -7, backgroundColor: "#22d3ee" }
-                                    : n === 1 ? { opacity: 1 }
-                                        : { rotate: 0, y: 0, backgroundColor: "#e6edf3" }
-                            }
-                            transition={{ duration: 0.25 }}
-                        />
-                    ))}
-                </button>
-            </div>
-
-            {/* ── Mobile dropdown ── */}
-            <AnimatePresence>
-                {menuOpen && (
-                    <motion.div
-                        key="mobile-panel"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" } satisfies Transition}
-                        className="overflow-hidden border-t-[0.5px] border-[#30363d] bg-[rgba(13,17,23,0.98)] md:hidden"
+                    {/* Logo */}
+                    <div
+                        className="logo-enter shrink-0 select-none text-[clamp(15px,2.5vw,17px)] font-bold tracking-[0.01em]"
+                        style={{ fontFamily: "var(--font-syne)" }}
                     >
-                        <div className="flex flex-col px-6 pb-5 pt-4">
-                            {LINKS.map((link, i) => (
-                                <motion.div
-                                    key={link.href}
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: i * 0.05, duration: 0.25 } satisfies Transition}
-                                >
-                                    <Link
-                                        href={link.href}
-                                        className="block border-b-[0.5px] border-[#21262d] py-[11px] text-[15px] no-underline transition-colors duration-200 last:border-none"
-                                        style={{ color: pathname === link.href ? "#22d3ee" : "#8b949e" }}
-                                    >
-                                        {link.label}
-                                    </Link>
-                                </motion.div>
-                            ))}
-                            <div className="mt-3 w-full">
-                                <HireBtn fullWidth />
-                            </div>
+                        <Link href="/" className="no-underline">
+                            <span className="text-cyan-400">&lt;</span>
+                            <span className="text-[#e6edf3]">Opi</span>
+                            <span className="text-cyan-400">.</span>
+                            <span className="text-red-400">dev</span>
+                            <span className="text-cyan-400"> /&gt;</span>
+                        </Link>
+                    </div>
+
+                    {/* Desktop nav links */}
+                    <ul
+                        className="hidden list-none items-center gap-[clamp(18px,2.5vw,30px)] md:flex"
+                        style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                        {LINKS.map((link, i) => (
+                            <li
+                                key={link.href}
+                                className="nav-item-enter"
+                                style={{ animationDelay: `${0.3 + i * 0.07}s` }}
+                            >
+                                <NavLink
+                                    label={link.label}
+                                    href={link.href}
+                                    active={pathname === link.href}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+
+                    {/* Desktop CTA */}
+                    <div className="cta-enter hidden md:block">
+                        <HireBtn />
+                    </div>
+
+                    {/* Mobile hamburger */}
+                    <button
+                        onClick={() => setMenuOpen((prev) => !prev)}
+                        aria-label="Toggle navigation menu"
+                        className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-1 md:hidden"
+                    >
+                        {[
+                            menuOpen ? "translateY(7px) rotate(45deg)" : "none",
+                            null,
+                            menuOpen ? "translateY(-7px) rotate(-45deg)" : "none",
+                        ].map((transform, n) =>
+                            n === 1 ? (
+                                <span
+                                    key={n}
+                                    className="block h-[2px] w-[22px] rounded-[2px] bg-[#e6edf3] transition-all duration-[250ms]"
+                                    style={{ opacity: menuOpen ? 0 : 1 }}
+                                />
+                            ) : (
+                                <span
+                                    key={n}
+                                    className="block h-[2px] w-[22px] rounded-[2px] transition-all duration-[250ms]"
+                                    style={{
+                                        background: menuOpen ? "#22d3ee" : "#e6edf3",
+                                        transform: transform as string,
+                                    }}
+                                />
+                            )
+                        )}
+                    </button>
+                </div>
+
+                {/* ── Mobile dropdown ── */}
+                <div
+                    className={[
+                        "overflow-hidden border-t border-[rgba(255,255,255,0.05)]",
+                        "bg-[rgba(13,17,23,0.25)] backdrop-blur-2xl md:hidden",
+                        "transition-[max-height,opacity] duration-300 ease-in-out",
+                        menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
+                    ].join(" ")}
+                >
+                    <div
+                        className="flex flex-col px-6 pb-5 pt-4"
+                        style={{ fontFamily: "var(--font-dm-sans)" }}
+                    >
+                        {LINKS.map((link, i) => (
+                            <Link
+                                key={link.href}
+                                href={link.href}
+                                className={[
+                                    "block border-b border-[rgba(255,255,255,0.05)] py-[11px]",
+                                    "text-[15px] no-underline transition-colors duration-200 last:border-none",
+                                    pathname === link.href ? "text-cyan-400" : "text-[#8b949e]",
+                                ].join(" ")}
+                                style={
+                                    menuOpen
+                                        ? { animation: `fadeInLeft 0.25s ease-out ${i * 0.05}s both` }
+                                        : {}
+                                }
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+
+                        <div className="mt-3 w-full">
+                            <HireBtn fullWidth />
                         </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.nav>
+                    </div>
+                </div>
+            </nav>
+        </>
     );
 }
 
-/* ── Nav link with animated underline ── */
-function NavLink({
-    label,
-    href,
-    active,
-}: {
-    label: string;
-    href: string;
-    active: boolean;
-}) {
+// ─────────────────────────────────────────────
+// NavLink — underline slides in on hover/active
+// ─────────────────────────────────────────────
+function NavLink({ label, href, active }: NavLinkProps) {
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -168,47 +185,113 @@ function NavLink({
             href={href}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
-            className="relative whitespace-nowrap no-underline text-[13.5px] tracking-[0.02em] transition-colors duration-200"
+            className="relative whitespace-nowrap text-[13.5px] tracking-[0.02em] no-underline transition-colors duration-200"
             style={{ color: active ? "#22d3ee" : hovered ? "#e6edf3" : "#8b949e" }}
         >
             {label}
-            <motion.span
-                className="absolute bottom-[-4px] left-0 h-[1px] bg-[#22d3ee]"
-                animate={{ width: active || hovered ? "100%" : "0%" }}
-                transition={{ duration: 0.25, ease: "easeOut" } satisfies Transition}
+            <span
+                className="absolute -bottom-1 left-0 h-[1px] bg-cyan-400 transition-[width] duration-[250ms] ease-out"
+                style={{ width: active || hovered ? "100%" : "0%" }}
             />
         </Link>
     );
 }
 
-/* ── Hire Me button — fill sweep + pulse glow ── */
-function HireBtn({ fullWidth = false }: { fullWidth?: boolean }) {
+// ─────────────────────────────────────────────
+// HireBtn — shimmer sweep + pulse ring (∞)
+// ─────────────────────────────────────────────
+function HireBtn({ fullWidth = false }: HireBtnProps) {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <motion.button
-            onHoverStart={() => setHovered(true)}
-            onHoverEnd={() => setHovered(false)}
-            className={`hire-pulse relative inline-flex cursor-pointer items-center justify-center gap-[7px] overflow-hidden rounded-[8px] border-[1.5px] border-[#22d3ee] px-5 py-[9px] text-[13px] font-medium tracking-[0.03em] transition-colors duration-300 ${fullWidth ? "w-full" : ""}`}
+        <button
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={[
+                "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
+                "overflow-hidden rounded-[8px] border-[1.5px] border-cyan-400",
+                "px-5 py-[9px] text-[13px] font-medium tracking-[0.03em]",
+                "transition-[color,background,box-shadow] duration-300",
+                fullWidth ? "w-full" : "",
+            ].join(" ")}
             style={{
                 fontFamily: "var(--font-dm-sans)",
                 color: hovered ? "#0d1117" : "#22d3ee",
-                background: "transparent",
-                animation: hovered ? "none" : undefined,
+                background: hovered ? "#22d3ee" : "transparent",
+                boxShadow: hovered ? "0 0 20px rgba(34,211,238,0.4)" : "none",
+                // pulse ring runs only when idle
+                animation: hovered ? "none" : "pulseRing 2s ease-out infinite",
             }}
         >
-            {/* Fill sweep background */}
-            <motion.span
-                className="absolute inset-0 bg-[#22d3ee]"
-                initial={{ x: "-101%" }}
-                animate={{ x: hovered ? "0%" : "-101%" }}
-                transition={{ duration: 0.34, ease: [0.4, 0, 0.2, 1] } satisfies Transition}
-            />
-            <svg className="relative z-10" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+            {/* Shimmer sweep — hidden on hover */}
+            {!hovered && (
+                <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                        background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)",
+                        animation: "shimmer 2.2s ease-in-out infinite",
+                    }}
+                />
+            )}
+
+            {/* Briefcase icon */}
+            <svg
+                aria-hidden="true"
+                className="relative z-10 shrink-0"
+                width="13"
+                height="13"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                viewBox="0 0 24 24"
+            >
                 <rect x="2" y="7" width="20" height="14" rx="2" />
                 <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
             </svg>
+
             <span className="relative z-10">Hire Me</span>
-        </motion.button>
+        </button>
     );
 }
+
+// ─────────────────────────────────────────────
+// Keyframes — self-contained, no config needed
+// ─────────────────────────────────────────────
+const KEYFRAMES = `
+  /* ── Entry animations (run once on mount) ── */
+  .navbar-enter   { animation: slideDown   0.65s cubic-bezier(0.22,1,0.36,1) both; }
+  .logo-enter     { animation: fadeInLeft  0.40s ease-out 0.25s              both; }
+  .cta-enter      { animation: fadeInRight 0.40s ease-out 0.55s              both; }
+  .nav-item-enter { animation: fadeInDown  0.35s ease-out                    both; opacity: 0; }
+
+  @keyframes slideDown {
+    from { transform: translateY(-110%); opacity: 0; }
+    to   { transform: translateY(0);     opacity: 1; }
+  }
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-10px); }
+    to   { opacity: 1; transform: translateX(0);     }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(10px); }
+    to   { opacity: 1; transform: translateX(0);    }
+  }
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0);    }
+  }
+
+  /* ── Hire Me: diagonal shimmer sweep ── */
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%) skewX(-15deg); }
+    100% { transform: translateX(350%)  skewX(-15deg); }
+  }
+
+  /* ── Hire Me: expanding pulse ring ── */
+  @keyframes pulseRing {
+    0%   { box-shadow: 0 0 0 0   rgba(34,211,238,0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(34,211,238,0);    }
+    100% { box-shadow: 0 0 0 0   rgba(34,211,238,0);    }
+  }
+`;

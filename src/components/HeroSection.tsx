@@ -17,38 +17,6 @@ const fadeIn = (delay = 0) => ({
     transition: { duration: 0.8, ease: "easeOut" as const, delay } satisfies Transition,
 });
 
-/* ── Skills ── */
-const SKILLS = [
-    { name: "HTML", color: "#f97316" },
-    { name: "CSS", color: "#3b82f6" },
-    { name: "Tailwind", color: "#06b6d4" },
-    { name: "JavaScript", color: "#facc15" },
-    { name: "TypeScript", color: "#60a5fa" },
-    { name: "React", color: "#22d3ee" },
-    { name: "Next.js", color: "#e6edf3" },
-    { name: "Node.js", color: "#6dbf67" },
-    { name: "Express", color: "#a3a3a3" },
-    { name: "Prisma", color: "#818cf8" },
-    { name: "Docker", color: "#38bdf8" },
-    { name: "Golang", color: "#67e8f9" },
-    { name: "BetterAuth", color: "#c084fc" },
-    { name: "MongoDB", color: "#4fa846" },
-    { name: "PostgreSQL", color: "#a78bfa" },
-];
-
-/*
- * Orbit icon positions — 8-point compass on 320px avatar
- * Center = (160,160), orbit radius r = 185px, icon = 46×46 (half = 23)
- *
- *  0°  top        → left:137px   top:-48px
- * 45°  top-right  → right:  6px  top:  6px
- * 90°  right      → right:-48px  top:137px
- *135°  bot-right  → right:  6px  bottom: 6px
- *180°  bottom     → left:137px   bottom:-48px
- *225°  bot-left   → left:  6px   bottom: 6px
- *270°  left       → left:-48px   top:137px
- *315°  top-left   → left:  6px   top:  6px
- */
 const ORBIT = [
     {
         // 0° — Top — Tailwind CSS
@@ -247,41 +215,54 @@ export default function HeroSection() {
                         <span className="text-[#e6edf3]">backend APIs</span>. Ready to bring ideas to life.
                     </motion.p>
 
-                    {/* Skill pills */}
-                    <motion.div {...up(1.0)} className="mb-7 flex flex-wrap gap-[7px]">
-                        {SKILLS.map((s) => (
-                            <motion.div
-                                key={s.name}
-                                whileHover={{ y: -2 }}
-                                transition={{ duration: 0.15 }}
-                                className="inline-flex cursor-default items-center gap-[5px] whitespace-nowrap rounded-full bg-[#161b22] px-[11px] py-[4px] text-[12px] text-[#8b949e] transition-colors duration-200 hover:border-[#22d3ee] hover:text-[#e6edf3]"
-                                style={{ border: "0.5px solid #30363d" }}
-                            >
-                                <div className="h-[5px] w-[5px] shrink-0 rounded-full" style={{ background: s.color }} />
-                                {s.name}
-                            </motion.div>
-                        ))}
-                    </motion.div>
 
                     {/* CTA buttons */}
+
                     <motion.div {...up(1.1)} className="mb-9 flex flex-wrap gap-3">
+                        {/* VIEW PROJECTS BUTTON */}
                         <motion.button
-                            whileHover={{ y: -2, backgroundColor: "#67e8f9" }}
+                            whileHover={{
+                                y: -2,
+                                borderColor: "#22d3ee",
+                                color: "#22d3ee",
+                            }}
                             transition={{ duration: 0.18 }}
-                            className="cursor-pointer whitespace-nowrap rounded-[8px] border-none bg-[#22d3ee] px-7 py-[13px] text-[14px] font-medium text-[#0d1117]"
-                            style={{ fontFamily: "var(--font-dm-sans)" }}
+                            className="flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[8px] bg-transparent px-6 py-[13px] text-[14px] text-[#e6edf3] transition-colors duration-200"
+                            style={{
+                                border: "0.5px solid #30363d",
+                                fontFamily: "var(--font-dm-sans)",
+                            }}
                         >
                             View Projects
                         </motion.button>
+
+
+                        {/* DOWNLOAD RESUME BUTTON */}
                         <motion.button
                             onClick={downloadResume}
-                            whileHover={{ y: -2, borderColor: "#22d3ee", color: "#22d3ee" }}
+                            whileHover={{
+                                y: -2,
+                                borderColor: "#22d3ee",
+                                color: "#22d3ee",
+                            }}
                             transition={{ duration: 0.18 }}
-                            className="flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[8px] bg-transparent px-6 py-[13px] text-[14px] text-[#e6edf3] transition-colors duration-200"
-                            style={{ border: "0.5px solid #30363d", fontFamily: "var(--font-dm-sans)" }}
+                            className="group flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-[8px] bg-transparent px-6 py-[13px] text-[14px] text-[#e6edf3] transition-colors duration-200"
+                            style={{
+                                border: "0.5px solid #30363d",
+                                fontFamily: "var(--font-dm-sans)",
+                            }}
                         >
-                            Download Resume
-                            <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <span>Download Resume</span>
+
+                            <svg
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                className="transition-transform duration-200 group-hover:translate-y-1"
+                            >
                                 <path d="M12 5v14M5 12l7 7 7-7" />
                             </svg>
                         </motion.button>
