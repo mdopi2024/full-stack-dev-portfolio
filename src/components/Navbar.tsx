@@ -23,7 +23,7 @@ interface HireBtnProps {
 const LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Services", href: "#2" },
+    { label: "Services", href: "/services" },
     { label: "Projects", href: "#3" },
     { label: "Contact", href: "#4" },
 ] as const;
