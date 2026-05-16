@@ -22,14 +22,22 @@ interface ProjectShowcaseProps {
 const ALL_PROJECTS: Project[] = [
     {
         id: 1,
-        title: "E-Commerce Platform",
+        title: "Hotel Management System",
         description:
-            "A clean, focused checkout UI built to reduce friction and maximise conversions through clear layout, validation, and trust-building elements.",
-        image: "/projects/ecommerce.png",
-        tags: ["Next.js", "Stripe", "Tailwind"],
-        frontendRepo: "https://github.com",
-        backendRepo: "https://github.com",
-        liveDemo: "https://example.com",
+            "A modern and scalable hotel management platform built with Next.js App Router, featuring room booking, Stripe payments, authentication, guest management, and admin dashboard functionality.",
+        image: "/projects/hotel-management.png",
+        tags: [
+            "Next.js",
+            "TypeScript",
+            "Better Auth",
+            "Stripe",
+        ],
+        frontendRepo:
+            "https://github.com/mdopi2024/B6A5-CLIENT-SIDE",
+        backendRepo:
+            "https://github.com/mdopi2024/B6A5-backend-server",
+        liveDemo:
+            "https://boshonto-totel-management-frontend.vercel.app",
     },
     {
         id: 2,
