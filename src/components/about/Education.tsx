@@ -28,41 +28,67 @@ export default function Education() {
     return (
         <section
             id="education"
-            className="relative w-full  bg-[#0d1117] text-white overflow-hidden"
+            className="relative w-full py-24 px-4 sm:px-6 text-white overflow-hidden"
         >
-            {/* glow */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[420px] h-[420px] bg-cyan-500/10 blur-[120px] rounded-full" />
-                <div className="absolute bottom-0 right-10 w-[300px] h-[300px] bg-cyan-400/10 blur-[120px] rounded-full" />
-            </div>
+            <div className="relative max-w-6xl mx-auto">
 
-            <div className="relative max-w-6xl mx-auto px-6">
+                {/* Header */}
+                <div className="flex flex-col items-center text-center gap-4 mb-14">
+                    <motion.span
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="font-mono text-[10px] tracking-[0.4em] uppercase"
+                        style={{ color: "rgba(34,211,238,0.5)" }}
+                    >
+                        ◈ Background
+                    </motion.span>
 
-                {/* HEADER */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-14"
-                >
-                    <div className="flex items-center justify-center gap-2 text-cyan-300">
-                        <FaGraduationCap size={22} />
-                        <h2 className="text-3xl md:text-4xl font-semibold">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-3xl md:text-4xl font-bold tracking-tight flex items-center gap-3"
+                    >
+                        <FaGraduationCap
+                            size={32}
+                            style={{ color: "#22d3ee", flexShrink: 0 }}
+                        />
+                        My{" "}
+                        <span
+                            className="text-transparent bg-clip-text"
+                            style={{
+                                backgroundImage:
+                                    "linear-gradient(135deg, #22d3ee 0%, #38bdf8 55%, #818cf8 100%)",
+                            }}
+                        >
                             Education
-                        </h2>
-                    </div>
+                        </span>
+                    </motion.h2>
 
-                    <p className="text-gray-400 mt-3 max-w-xl mx-auto">
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="text-slate-400 text-sm max-w-md leading-relaxed"
+                    >
                         My academic journey and learning background.
-                    </p>
-                </motion.div>
+                    </motion.p>
 
-                {/* GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        className="h-px w-20 rounded-full"
+                        style={{
+                            background:
+                                "linear-gradient(90deg, transparent, rgba(34,211,238,0.4), transparent)",
+                        }}
+                    />
+                </div>
 
+                {/* Cards grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     {education.map((item, i) => {
                         const Icon = item.icon;
-
                         return (
                             <motion.div
                                 key={i}
@@ -70,72 +96,96 @@ export default function Education() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                                whileHover={{ y: -6, scale: 1.02 }}
-                                className="relative rounded-2xl bg-[#161b22] border border-cyan-500/10 p-6 overflow-hidden group"
+                                whileHover={{ y: -4, scale: 1.015 }}
+                                className="relative rounded-2xl p-6 overflow-hidden group cursor-default"
+                                style={{
+                                    background: "rgba(10,22,44,0.6)",
+                                    border: "1px solid rgba(34,211,238,0.08)",
+                                    backdropFilter: "blur(10px)",
+                                    boxShadow: "0 8px 32px -8px rgba(0,0,0,0.4)",
+                                }}
+                                onMouseEnter={e => {
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,211,238,0.22)";
+                                    (e.currentTarget as HTMLElement).style.boxShadow = `0 0 0 1px rgba(34,211,238,0.1), 0 20px 48px -12px rgba(6,182,212,0.18)`;
+                                }}
+                                onMouseLeave={e => {
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,211,238,0.08)";
+                                    (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px -8px rgba(0,0,0,0.4)";
+                                }}
                             >
-                                {/* glow */}
+                                {/* Corner glow */}
                                 <div
-                                    className="absolute -top-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-20 group-hover:opacity-40 transition"
+                                    className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-10 group-hover:opacity-25 transition-opacity duration-500"
                                     style={{ background: item.color }}
                                 />
 
-                                {/* TOP */}
-                                <div className="flex items-start justify-between">
+                                {/* Top row */}
+                                <div className="flex items-start justify-between gap-3">
                                     <div className="flex items-center gap-3">
                                         <div
-                                            className="p-2 rounded-lg bg-[#0d1117] border border-cyan-500/20"
-                                            style={{ color: item.color }}
+                                            className="shrink-0 p-2.5 rounded-xl"
+                                            style={{
+                                                background: "rgba(10,22,44,0.8)",
+                                                border: "1px solid rgba(34,211,238,0.12)",
+                                                color: item.color,
+                                            }}
                                         >
-                                            <Icon size={20} />
+                                            <Icon size={18} />
                                         </div>
-
-                                        <h3 className="text-lg md:text-xl font-semibold text-white">
+                                        <h3 className="text-sm md:text-base font-semibold text-slate-200 leading-snug">
                                             {item.title}
                                         </h3>
                                     </div>
 
-                                    <span className="text-xs px-3 py-1 rounded-full bg-[#0d1117] border border-cyan-500/20 text-cyan-300">
+                                    <span
+                                        className="shrink-0 text-[10px] font-mono font-bold px-2.5 py-1 rounded-full"
+                                        style={{
+                                            background: "rgba(34,211,238,0.07)",
+                                            border: "1px solid rgba(34,211,238,0.18)",
+                                            color: item.color,
+                                        }}
+                                    >
                                         {item.year}
                                     </span>
                                 </div>
 
-                                {/* DETAILS (FIXED VISIBILITY) */}
+                                {/* Details */}
                                 <div className="mt-5 space-y-3 text-sm">
-
                                     <div>
-                                        <p className="text-gray-400 text-xs uppercase tracking-wide">
+                                        <p className="text-[10px] font-mono uppercase tracking-[0.2em] mb-1"
+                                            style={{ color: "rgba(34,211,238,0.4)" }}>
                                             Institute
                                         </p>
-                                        <p className="text-white font-medium">
-                                            {item.institute}
-                                        </p>
+                                        <p className="text-slate-200 font-medium">{item.institute}</p>
                                     </div>
 
                                     <div className="flex justify-between gap-4">
                                         <div>
-                                            <p className="text-gray-400 text-xs uppercase tracking-wide">
+                                            <p className="text-[10px] font-mono uppercase tracking-[0.2em] mb-1"
+                                                style={{ color: "rgba(34,211,238,0.4)" }}>
                                                 Group
                                             </p>
-                                            <p className="text-gray-200">
-                                                {item.group}
-                                            </p>
+                                            <p className="text-slate-300">{item.group}</p>
                                         </div>
-
                                         <div>
-                                            <p className="text-gray-400 text-xs uppercase tracking-wide">
+                                            <p className="text-[10px] font-mono uppercase tracking-[0.2em] mb-1"
+                                                style={{ color: "rgba(34,211,238,0.4)" }}>
                                                 Result
                                             </p>
-                                            <p className="text-cyan-300 font-semibold">
+                                            <p className="font-bold text-transparent bg-clip-text"
+                                                style={{ backgroundImage: `linear-gradient(135deg, ${item.color}, #818cf8)` }}>
                                                 {item.result}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* bottom line */}
+                                {/* Animated bottom line */}
                                 <div
-                                    className="mt-5 h-[2px] w-0 group-hover:w-full transition-all duration-500"
-                                    style={{ background: item.color }}
+                                    className="mt-5 h-[1.5px] w-0 group-hover:w-full transition-all duration-500 rounded-full"
+                                    style={{
+                                        background: `linear-gradient(90deg, ${item.color}, transparent)`,
+                                    }}
                                 />
                             </motion.div>
                         );

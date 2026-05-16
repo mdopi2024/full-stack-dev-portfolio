@@ -2,25 +2,12 @@
 
 import { motion, type Variants } from "framer-motion";
 
-/* ---------------- ICONS ---------------- */
 import {
-    SiHtml5,
-    SiCss,
-    SiTailwindcss,
-    SiJavascript,
-    SiTypescript,
-    SiReact,
-    SiNextdotjs,
-    SiNodedotjs,
-    SiExpress,
-    SiPrisma,
-    SiDocker,
-    SiGo,
-    SiMongodb,
-    SiPostgresql,
+    SiHtml5, SiCss, SiTailwindcss, SiJavascript, SiTypescript,
+    SiReact, SiNextdotjs, SiNodedotjs, SiExpress, SiPrisma,
+    SiDocker, SiGo, SiMongodb, SiPostgresql,
 } from "react-icons/si";
 
-/* ---------------- SKILLS ---------------- */
 const skills = [
     { name: "HTML", icon: SiHtml5, color: "#e34f26" },
     { name: "CSS", icon: SiCss, color: "#1572b6" },
@@ -31,30 +18,21 @@ const skills = [
     { name: "Next.js", icon: SiNextdotjs, color: "#ffffff" },
     { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
     { name: "Express", icon: SiExpress, color: "#aaaaaa" },
-    { name: "Prisma", icon: SiPrisma, color: "#2d3748" },
+    { name: "Prisma", icon: SiPrisma, color: "#818cf8" },
     { name: "Docker", icon: SiDocker, color: "#2496ed" },
     { name: "Golang", icon: SiGo, color: "#00ADD8" },
     { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
     { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
 ];
 
-/* ---------------- ANIMATION ---------------- */
 const container: Variants = {
     hidden: { opacity: 0 },
-    show: {
-        opacity: 1,
-        transition: { staggerChildren: 0.06 },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.06 } },
 };
 
 const item: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.9 },
-    show: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: { duration: 0.4, ease: [0.25, 0.8, 0.25, 1] },
-    },
+    show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.4, ease: [0.25, 0.8, 0.25, 1] } },
 };
 
 export default function SkillsSection() {
@@ -62,36 +40,7 @@ export default function SkillsSection() {
         <section
             id="skills"
             className="relative w-full py-24 px-4 sm:px-6 overflow-hidden text-white"
-            style={{
-                background:
-                    "linear-gradient(160deg, #020c1b 0%, #041525 30%, #030e1f 60%, #020c1b 100%)",
-            }}
         >
-            {/* Ambient radial glows — matches ProjectShowcase */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div
-                    className="absolute -top-24 left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at center, rgba(6,182,212,0.08) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 right-0 w-[500px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at bottom right, rgba(14,165,233,0.06) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute top-1/2 -translate-y-1/2 left-0 w-[400px] h-[400px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at left, rgba(6,182,212,0.04) 0%, transparent 65%)",
-                    }}
-                />
-            </div>
-
             <div className="relative max-w-6xl mx-auto">
 
                 {/* Header */}

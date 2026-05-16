@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
 interface Project {
     id: number;
     title: string;
@@ -18,7 +17,6 @@ interface ProjectShowcaseProps {
     count: number;
 }
 
-// ─── Data ─────────────────────────────────────────────────────────────────────
 const ALL_PROJECTS: Project[] = [
     {
         id: 1,
@@ -26,18 +24,10 @@ const ALL_PROJECTS: Project[] = [
         description:
             "A modern and scalable hotel management platform built with Next.js App Router, featuring room booking, Stripe payments, authentication, guest management, and admin dashboard functionality.",
         image: "/projects/hotel-management.png",
-        tags: [
-            "Next.js",
-            "TypeScript",
-            "Better Auth",
-            "Stripe",
-        ],
-        frontendRepo:
-            "https://github.com/mdopi2024/B6A5-CLIENT-SIDE",
-        backendRepo:
-            "https://github.com/mdopi2024/B6A5-backend-server",
-        liveDemo:
-            "https://boshonto-totel-management-frontend.vercel.app",
+        tags: ["Next.js", "TypeScript", "Better Auth", "Stripe"],
+        frontendRepo: "https://github.com/mdopi2024/B6A5-CLIENT-SIDE",
+        backendRepo: "https://github.com/mdopi2024/B6A5-backend-server",
+        liveDemo: "https://boshonto-totel-management-frontend.vercel.app",
     },
     {
         id: 2,
@@ -45,21 +35,10 @@ const ALL_PROJECTS: Project[] = [
         description:
             "A full-stack meal ordering platform where customers can browse meals, place orders, track deliveries, and leave reviews, while providers and admins manage menus, orders, users, and categories through role-based dashboards.",
         image: "/projects/luxebites.png",
-        tags: [
-            "React",
-            "Tailwind CSS",
-            "Node.js",
-            "Express.js",
-            "PostgreSQL",
-            "Prisma",
-            "JWT",
-        ],
-        frontendRepo:
-            "https://github.com/mdopi2024/B6A4-LUXEBUTES-CLIENT",
-        backendRepo:
-            "https://github.com/mdopi2024/B6A4-LUXEBUTE--SERVER",
-        liveDemo:
-            "https://b6-a4-frontend-client.vercel.app",
+        tags: ["React", "Tailwind CSS", "Node.js", "Express.js", "PostgreSQL", "Prisma", "JWT"],
+        frontendRepo: "https://github.com/mdopi2024/B6A4-LUXEBUTES-CLIENT",
+        backendRepo: "https://github.com/mdopi2024/B6A4-LUXEBUTE--SERVER",
+        liveDemo: "https://b6-a4-frontend-client.vercel.app",
     },
     {
         id: 3,
@@ -144,9 +123,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         const el = cardRef.current;
         if (!el) return;
         const obs = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) { setVisible(true); obs.disconnect(); }
-            },
+            ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
             { threshold: 0.1 }
         );
         obs.observe(el);
@@ -164,10 +141,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 transform: visible ? "translateY(0) scale(1)" : "translateY(40px) scale(0.97)",
                 transition: "opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease",
                 transitionDelay: `${index * 100}ms`,
+                background: "rgba(10,22,44,0.55)",
+                backdropFilter: "blur(12px)",
                 border: hovered ? "1px solid rgba(34,211,238,0.28)" : "1px solid rgba(34,211,238,0.07)",
                 boxShadow: hovered
                     ? "0 0 0 1px rgba(34,211,238,0.12), 0 24px 64px -16px rgba(6,182,212,0.22), 0 0 60px -20px rgba(6,182,212,0.12)"
-                    : "0 8px 32px -8px rgba(0,0,0,0.6)",
+                    : "0 8px 32px -8px rgba(0,0,0,0.4)",
             }}
         >
             {/* Sweeping top accent */}
@@ -194,7 +173,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050c1c] via-[#050c1c]/25 to-transparent" />
 
-                {/* Tags centered on image */}
+                {/* Tags */}
                 <div className="absolute bottom-3 left-0 right-0 flex flex-wrap justify-center gap-1.5 px-3">
                     {project.tags.map((tag) => (
                         <span
@@ -226,13 +205,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                     </p>
                 </div>
 
-                {/* Thin divider */}
                 <div
                     className="h-px w-10 mx-auto rounded-full"
                     style={{ background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.25), transparent)" }}
                 />
 
-                {/* Buttons: repos row + demo full-width */}
+                {/* Buttons */}
                 <div className="flex flex-col gap-1.5 mt-auto">
                     <div className="flex gap-1.5">
                         <a
@@ -264,7 +242,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                             Backend
                         </a>
                     </div>
-
                     <a
                         href={project.liveDemo}
                         target="_blank"
@@ -289,50 +266,16 @@ export default function ProjectShowcase({ count }: ProjectShowcaseProps) {
     const projects = ALL_PROJECTS.slice(0, Math.min(count, ALL_PROJECTS.length));
 
     const gridClass =
-        count === 1
-            ? "grid-cols-1 max-w-xs mx-auto"
-            : count === 2
-                ? "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto"
-                : count === 3
-                    ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        count === 1 ? "grid-cols-1 max-w-xs mx-auto"
+            : count === 2 ? "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto"
+                : count === 3 ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
                     : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4";
 
     return (
-        <section
-            className="relative w-full py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
-            style={{
-                background:
-                    "linear-gradient(160deg, #020c1b 0%, #041525 30%, #030e1f 60%, #020c1b 100%)",
-            }}
-        >
-            {/* Ambient radial glows — no grid pattern */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div
-                    className="absolute -top-24 left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at center, rgba(6,182,212,0.08) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 right-0 w-[500px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at bottom right, rgba(14,165,233,0.06) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute top-1/2 -translate-y-1/2 left-0 w-[400px] h-[400px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at left, rgba(6,182,212,0.04) 0%, transparent 65%)",
-                    }}
-                />
-            </div>
-
+        <section className="relative w-full py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
             <div className="relative max-w-7xl mx-auto">
 
-                {/* Section Header — centered */}
+                {/* Section Header */}
                 <div className="mb-16 flex flex-col items-center text-center gap-4">
                     <span
                         className="font-mono text-[10px] tracking-[0.4em] uppercase"
@@ -379,8 +322,3 @@ export default function ProjectShowcase({ count }: ProjectShowcaseProps) {
         </section>
     );
 }
-
-
-
-
-

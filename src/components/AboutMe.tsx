@@ -8,39 +8,10 @@ const AboutMe = () => {
         <section
             id="about"
             className="relative w-full py-24 px-4 sm:px-6 text-white overflow-hidden"
-            style={{
-                background:
-                    "linear-gradient(160deg, #020c1b 0%, #041525 30%, #030e1f 60%, #020c1b 100%)",
-            }}
         >
-            {/* Ambient radial glows — matches ProjectShowcase & SkillsSection */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div
-                    className="absolute -top-24 left-1/2 -translate-x-1/2 w-[800px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at center, rgba(6,182,212,0.08) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute bottom-0 right-0 w-[500px] h-[500px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at bottom right, rgba(14,165,233,0.06) 0%, transparent 65%)",
-                    }}
-                />
-                <div
-                    className="absolute top-1/2 -translate-y-1/2 left-0 w-[400px] h-[400px]"
-                    style={{
-                        background:
-                            "radial-gradient(ellipse at left, rgba(6,182,212,0.04) 0%, transparent 65%)",
-                    }}
-                />
-            </div>
-
             <div className="relative max-w-6xl mx-auto">
 
-                {/* Header — centered, matches other sections */}
+                {/* Header */}
                 <div className="flex flex-col items-center text-center gap-4 mb-14">
                     <motion.span
                         initial={{ opacity: 0 }}
@@ -99,7 +70,6 @@ const AboutMe = () => {
                                     "0 0 40px rgba(6,182,212,0.08), 0 0 0 1px rgba(34,211,238,0.05)",
                             }}
                         >
-                            {/* Subtle gradient overlay */}
                             <div
                                 className="absolute inset-0 z-10"
                                 style={{
@@ -107,7 +77,6 @@ const AboutMe = () => {
                                         "linear-gradient(135deg, rgba(34,211,238,0.08) 0%, transparent 60%)",
                                 }}
                             />
-                            {/* Top accent line */}
                             <div
                                 className="absolute top-0 left-0 right-0 h-[1.5px] z-20"
                                 style={{
@@ -137,8 +106,7 @@ const AboutMe = () => {
                             <span
                                 className="font-semibold text-transparent bg-clip-text"
                                 style={{
-                                    backgroundImage:
-                                        "linear-gradient(135deg, #22d3ee, #38bdf8)",
+                                    backgroundImage: "linear-gradient(135deg, #22d3ee, #38bdf8)",
                                 }}
                             >
                                 Full Stack Developer
@@ -172,7 +140,6 @@ const AboutMe = () => {
                             backend scalability, and modern full-stack development practices.
                         </p>
 
-                        {/* Thin accent divider */}
                         <div
                             className="h-px w-16 rounded-full"
                             style={{
