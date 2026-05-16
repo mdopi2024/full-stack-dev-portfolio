@@ -9,7 +9,7 @@ export default function page() {
             <HeroSection />
             <AboutMe />
             <Skills />
-            <Projects count={4} />
+            <Projects count={2} />
         </>
     )
 }

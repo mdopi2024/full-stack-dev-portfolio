@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, type Transition } from "framer-motion";
 import { downloadResume } from "@/utils/resume";
+import Link from "next/link";
 
 // ─────────────────────────────────────────────
 // Framer helpers
@@ -272,7 +273,7 @@ export default function HeroSection() {
                                 <rect x="2" y="3" width="20" height="14" rx="2" />
                                 <path d="M8 21h8M12 17v4" />
                             </svg>
-                            <span className="relative z-10">View Projects</span>
+                            <span className="relative z-10"><Link href="/projects">View Projects</Link></span>
                         </motion.button>
 
                         {/* Download Resume */}

@@ -41,14 +41,25 @@ const ALL_PROJECTS: Project[] = [
     },
     {
         id: 2,
-        title: "Clinic Dashboard",
+        title: "LuxeBites",
         description:
-            "Clinic management dashboard built for clarity and efficiency. Prioritises quick access to patient data, appointment stats, and admin tools.",
-        image: "/projects/clinic.png",
-        tags: ["React", "Node.js", "MongoDB"],
-        frontendRepo: "https://github.com",
-        backendRepo: "https://github.com",
-        liveDemo: "https://example.com",
+            "A full-stack meal ordering platform where customers can browse meals, place orders, track deliveries, and leave reviews, while providers and admins manage menus, orders, users, and categories through role-based dashboards.",
+        image: "/projects/luxebites.png",
+        tags: [
+            "React",
+            "Tailwind CSS",
+            "Node.js",
+            "Express.js",
+            "PostgreSQL",
+            "Prisma",
+            "JWT",
+        ],
+        frontendRepo:
+            "https://github.com/mdopi2024/B6A4-LUXEBUTES-CLIENT",
+        backendRepo:
+            "https://github.com/mdopi2024/B6A4-LUXEBUTE--SERVER",
+        liveDemo:
+            "https://b6-a4-frontend-client.vercel.app",
     },
     {
         id: 3,
