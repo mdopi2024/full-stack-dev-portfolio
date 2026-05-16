@@ -21,12 +21,12 @@ const fadeIn = (delay = 0) => ({
 });
 
 // ─────────────────────────────────────────────
-// Orbit icons — 8 tech badges
+// Orbit icons
 // ─────────────────────────────────────────────
 const ORBIT = [
     {
         label: "Tailwind CSS",
-        bg: "#0c1a24", border: "#06b6d4",
+        bg: "rgba(6,182,212,0.06)", border: "rgba(6,182,212,0.25)",
         animClass: "animate-float-a",
         icon: (
             <svg width="22" height="22" viewBox="0 0 54 33" fill="#06b6d4">
@@ -38,7 +38,7 @@ const ORBIT = [
     },
     {
         label: "Next.js",
-        bg: "#111111", border: "#555",
+        bg: "rgba(255,255,255,0.04)", border: "rgba(255,255,255,0.12)",
         animClass: "animate-float-b",
         icon: (
             <svg width="22" height="22" viewBox="0 0 180 180" fill="white">
@@ -48,7 +48,7 @@ const ORBIT = [
     },
     {
         label: "TypeScript",
-        bg: "#0d1828", border: "#3178c6",
+        bg: "rgba(49,120,198,0.08)", border: "rgba(49,120,198,0.3)",
         animClass: "animate-float-c",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@ const ORBIT = [
     },
     {
         label: "Prisma",
-        bg: "#0f0f1a", border: "#818cf8",
+        bg: "rgba(129,140,248,0.06)", border: "rgba(129,140,248,0.22)",
         animClass: "animate-float-a",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="#818cf8">
@@ -69,7 +69,7 @@ const ORBIT = [
     },
     {
         label: "Node.js",
-        bg: "#0d1f12", border: "#68a063",
+        bg: "rgba(104,160,99,0.07)", border: "rgba(104,160,99,0.25)",
         animClass: "animate-float-b",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="#68a063">
@@ -79,7 +79,7 @@ const ORBIT = [
     },
     {
         label: "Docker",
-        bg: "#0d1f33", border: "#2496ED",
+        bg: "rgba(36,150,237,0.07)", border: "rgba(36,150,237,0.25)",
         animClass: "animate-float-c",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="#2496ED">
@@ -89,7 +89,7 @@ const ORBIT = [
     },
     {
         label: "JavaScript",
-        bg: "#1f1a00", border: "#facc15",
+        bg: "rgba(250,204,21,0.06)", border: "rgba(250,204,21,0.22)",
         animClass: "animate-float-a",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ const ORBIT = [
     },
     {
         label: "PostgreSQL",
-        bg: "#0d1a2d", border: "#336791",
+        bg: "rgba(51,103,145,0.08)", border: "rgba(74,144,217,0.25)",
         animClass: "animate-float-b",
         icon: (
             <svg width="22" height="22" viewBox="0 0 24 24">
@@ -124,7 +124,6 @@ export default function HeroSection() {
     const [cursorOn, setCursorOn] = useState(true);
     const fullName = "Md Opi Korim";
 
-    /* Typewriter */
     useEffect(() => {
         let i = 0;
         const delay = setTimeout(() => {
@@ -138,7 +137,6 @@ export default function HeroSection() {
         return () => clearTimeout(delay);
     }, []);
 
-    /* Blinking cursor */
     useEffect(() => {
         const iv = setInterval(() => setCursorOn((v) => !v), 530);
         return () => clearInterval(iv);
@@ -151,30 +149,29 @@ export default function HeroSection() {
 
     return (
         <section
-            className="relative overflow-hidden bg-[#0d1117]"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+            className="relative overflow-hidden"
+            style={{
+                fontFamily: "var(--font-dm-sans)",
+                background: "linear-gradient(160deg, #020c1b 0%, #041525 30%, #030e1f 60%, #020c1b 100%)",
+            }}
         >
             <style>{KEYFRAMES}</style>
 
-            {/* ── Grid background ── */}
-            <div
-                className="pointer-events-none absolute inset-0 grid-fade"
-                style={{
-                    backgroundImage:
-                        "linear-gradient(#30363d 0.5px,transparent 0.5px),linear-gradient(90deg,#30363d 0.5px,transparent 0.5px)",
-                    backgroundSize: "60px 60px",
-                }}
-            />
-
-            {/* ── Glow orbs ── */}
-            <div
-                className="pointer-events-none absolute right-[5%] bottom-[-100px] h-[480px] w-[480px] rounded-full"
-                style={{ background: "radial-gradient(circle,rgba(34,211,238,0.07) 0%,transparent 70%)" }}
-            />
-            <div
-                className="pointer-events-none absolute top-[8%] left-[-80px] h-[320px] w-[320px] rounded-full"
-                style={{ background: "radial-gradient(circle,rgba(248,113,113,0.05) 0%,transparent 70%)" }}
-            />
+            {/* ── Ambient radial glows — matches all sections ── */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div
+                    className="absolute -top-24 left-1/2 -translate-x-1/2 w-[900px] h-[600px]"
+                    style={{ background: "radial-gradient(ellipse at center, rgba(6,182,212,0.09) 0%, transparent 65%)" }}
+                />
+                <div
+                    className="absolute bottom-0 right-0 w-[600px] h-[600px]"
+                    style={{ background: "radial-gradient(ellipse at bottom right, rgba(14,165,233,0.06) 0%, transparent 65%)" }}
+                />
+                <div
+                    className="absolute top-1/2 -translate-y-1/2 left-0 w-[400px] h-[500px]"
+                    style={{ background: "radial-gradient(ellipse at left, rgba(6,182,212,0.04) 0%, transparent 65%)" }}
+                />
+            </div>
 
             {/* ── Two-column grid ── */}
             <div className="relative z-10 grid min-h-screen grid-cols-1 items-center gap-10 px-[clamp(20px,5vw,52px)] pt-[100px] pb-[80px] md:grid-cols-2 md:gap-16 md:pt-[90px]">
@@ -182,11 +179,11 @@ export default function HeroSection() {
                 {/* ───────── LEFT COLUMN ───────── */}
                 <div className="flex flex-col">
 
-                    {/* "Open to opportunities" badge */}
+                    {/* Open to opportunities badge */}
                     <motion.div
                         {...up(0.3)}
                         className="mb-5 inline-flex w-fit items-center gap-2 rounded-full px-[14px] py-[5px] text-[12px] text-[#22d3ee]"
-                        style={{ background: "rgba(34,211,238,0.09)", border: "0.5px solid rgba(34,211,238,0.28)" }}
+                        style={{ background: "rgba(34,211,238,0.07)", border: "1px solid rgba(34,211,238,0.18)" }}
                     >
                         <div className="h-[7px] w-[7px] rounded-full bg-[#22d3ee] animate-pulse-dot" />
                         Open to opportunities · Fresher
@@ -195,17 +192,26 @@ export default function HeroSection() {
                     {/* Role tag */}
                     <motion.div
                         {...up(0.45)}
-                        className="mb-5 w-fit rounded-[6px] border-[0.5px] border-[#30363d] bg-[#161b22] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8b949e]"
-                        style={{ fontFamily: "var(--font-syne)" }}
+                        className="mb-5 w-fit rounded-[6px] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em]"
+                        style={{
+                            fontFamily: "var(--font-syne)",
+                            background: "rgba(34,211,238,0.06)",
+                            border: "1px solid rgba(34,211,238,0.12)",
+                            color: "rgba(34,211,238,0.7)",
+                        }}
                     >
                         Full Stack Developer
                     </motion.div>
 
-                    {/* Hi, I'm — display font */}
+                    {/* Hi, I'm */}
                     <motion.div {...up(0.58)}>
                         <span
-                            className="block text-[clamp(18px,2.5vw,28px)] font-medium leading-tight text-[#8b949e]"
-                            style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: "italic" }}
+                            className="block text-[clamp(18px,2.5vw,28px)] font-medium leading-tight"
+                            style={{
+                                fontFamily: "'Playfair Display', Georgia, serif",
+                                fontStyle: "italic",
+                                color: "rgba(148,163,184,0.7)",
+                            }}
                         >
                             Hi, I&apos;m
                         </span>
@@ -215,10 +221,14 @@ export default function HeroSection() {
                             className="mb-5 min-h-[1.15em] text-[clamp(34px,5.5vw,55px)] font-extrabold leading-none tracking-[-0.02em]"
                             style={{ fontFamily: "var(--font-syne)" }}
                         >
-                            <span className="text-[#c9d1d9]">{w1}</span>
-                            <span className="text-[#22d3ee]">{w2}</span>
-                            <span className="text-[#f87171]">{w3}</span>
-                            {/* cursor */}
+                            <span className="text-slate-200">{w1}</span>
+                            <span
+                                className="text-transparent bg-clip-text"
+                                style={{ backgroundImage: "linear-gradient(135deg, #22d3ee, #38bdf8)" }}
+                            >
+                                {w2}
+                            </span>
+                            <span className="text-slate-200">{w3}</span>
                             <span
                                 className="ml-[3px] inline-block h-[0.8em] w-[3px] align-middle rounded-[2px] bg-[#22d3ee] transition-opacity duration-100"
                                 style={{ opacity: cursorOn ? 1 : 0 }}
@@ -229,29 +239,35 @@ export default function HeroSection() {
                     {/* Description */}
                     <motion.p
                         {...up(0.75)}
-                        className="mb-7 max-w-[460px] text-[clamp(13px,1.4vw,15px)] leading-[1.9] text-[#8b949e]"
+                        className="mb-7 max-w-[460px] text-[clamp(13px,1.4vw,15px)] leading-[1.9] text-slate-400"
                     >
                         A passionate{" "}
-                        <span className="text-[#e6edf3] font-medium">Full Stack Developer</span>{" "}
-                        who loves building fast, clean, and scalable web apps — from pixel-perfect frontends to
-                        solid{" "}
-                        <span className="text-[#e6edf3] font-medium">backend APIs</span>.
+                        <span className="text-slate-200 font-medium">Full Stack Developer</span>{" "}
+                        who loves building fast, clean, and scalable web apps — from pixel-perfect
+                        frontends to solid{" "}
+                        <span className="text-slate-200 font-medium">backend APIs</span>.
                         Ready to bring ideas to life.
                     </motion.p>
 
                     {/* CTA buttons */}
                     <motion.div {...up(0.9)} className="mb-9 flex flex-wrap gap-3">
 
-                        {/* View Projects — solid cyan */}
+                        {/* View Projects */}
                         <motion.button
                             whileHover={{ y: -2, scale: 1.02 }}
                             whileTap={{ scale: 0.97 }}
                             transition={{ duration: 0.16 }}
-                            className="group relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-[10px] bg-[#22d3ee] px-6 py-[13px] text-[13.5px] font-semibold tracking-[0.01em] text-[#0d1117] shadow-[0_0_20px_rgba(34,211,238,0.25)] transition-shadow duration-300 hover:shadow-[0_0_32px_rgba(34,211,238,0.45)]"
-                            style={{ fontFamily: "var(--font-dm-sans)" }}
+                            className="group relative inline-flex cursor-pointer items-center gap-2 overflow-hidden rounded-[10px] px-6 py-[13px] text-[13.5px] font-semibold tracking-[0.01em] transition-shadow duration-300"
+                            style={{
+                                background: "linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%)",
+                                color: "#020c1b",
+                                boxShadow: "0 0 24px rgba(6,182,212,0.25)",
+                                fontFamily: "var(--font-dm-sans)",
+                            }}
+                            onMouseEnter={e => (e.currentTarget as HTMLElement).style.boxShadow = "0 0 36px rgba(6,182,212,0.45)"}
+                            onMouseLeave={e => (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(6,182,212,0.25)"}
                         >
-                            {/* shine on hover */}
-                            <span className="pointer-events-none absolute inset-0 translate-x-[-100%] skew-x-[-15deg] bg-white/20 transition-transform duration-500 group-hover:translate-x-[200%]" />
+                            <span className="pointer-events-none absolute inset-0 translate-x-[-100%] skew-x-[-15deg] bg-white/15 transition-transform duration-500 group-hover:translate-x-[200%]" />
                             <svg className="relative z-10 shrink-0" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" aria-hidden="true">
                                 <rect x="2" y="3" width="20" height="14" rx="2" />
                                 <path d="M8 21h8M12 17v4" />
@@ -259,14 +275,20 @@ export default function HeroSection() {
                             <span className="relative z-10">View Projects</span>
                         </motion.button>
 
-                        {/* Download Resume — ghost */}
+                        {/* Download Resume */}
                         <motion.button
                             onClick={downloadResume}
-                            whileHover={{ y: -2, borderColor: "#22d3ee", color: "#22d3ee" }}
+                            whileHover={{ y: -2 }}
                             whileTap={{ scale: 0.97 }}
                             transition={{ duration: 0.16 }}
-                            className="group inline-flex cursor-pointer items-center gap-2 rounded-[10px] bg-transparent px-6 py-[13px] text-[13.5px] font-semibold tracking-[0.01em] text-[#e6edf3] transition-colors duration-200"
-                            style={{ border: "0.5px solid #30363d", fontFamily: "var(--font-dm-sans)" }}
+                            className="group inline-flex cursor-pointer items-center gap-2 rounded-[10px] px-6 py-[13px] text-[13.5px] font-semibold tracking-[0.01em] text-slate-300 transition-all duration-200 hover:text-cyan-300"
+                            style={{
+                                border: "1px solid rgba(34,211,238,0.12)",
+                                background: "rgba(34,211,238,0.04)",
+                                fontFamily: "var(--font-dm-sans)",
+                            }}
+                            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,211,238,0.3)"; (e.currentTarget as HTMLElement).style.background = "rgba(34,211,238,0.08)"; }}
+                            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = "rgba(34,211,238,0.12)"; (e.currentTarget as HTMLElement).style.background = "rgba(34,211,238,0.04)"; }}
                         >
                             <span>Download Resume</span>
                             <svg
@@ -283,17 +305,21 @@ export default function HeroSection() {
                     {/* Stats */}
                     <motion.div
                         {...up(1.05)}
-                        className="flex flex-wrap gap-[clamp(16px,3vw,28px)] border-t-[0.5px] border-[#30363d] pt-[22px]"
+                        className="flex flex-wrap gap-[clamp(16px,3vw,28px)] pt-[22px]"
+                        style={{ borderTop: "1px solid rgba(34,211,238,0.08)" }}
                     >
                         {STATS.map((s) => (
                             <div key={s.label}>
                                 <div
                                     className="text-[clamp(18px,2vw,24px)] font-bold"
-                                    style={{ fontFamily: "var(--font-syne)", color: s.cyan ? "#22d3ee" : "#e6edf3" }}
+                                    style={{
+                                        fontFamily: "var(--font-syne)",
+                                        color: s.cyan ? "#22d3ee" : "#e2e8f0",
+                                    }}
                                 >
                                     {s.val}
                                 </div>
-                                <div className="mt-[2px] text-[11px] text-[#8b949e]">{s.label}</div>
+                                <div className="mt-[2px] text-[11px] text-slate-500">{s.label}</div>
                             </div>
                         ))}
                     </motion.div>
@@ -304,22 +330,27 @@ export default function HeroSection() {
                     {...fadeIn(0.6)}
                     className="order-first flex items-center justify-center md:order-last"
                 >
-                    {/* Outer wrapper — extra space for orbit icons */}
                     <div className="relative flex flex-col items-center gap-5">
 
                         {/* Avatar + rings */}
                         <div className="relative h-[260px] w-[260px] md:h-[300px] md:w-[300px]">
 
-                            {/* Spinning dashed ring */}
-                            <div className="animate-spin-slow absolute inset-[-18px] rounded-full border-[1.5px] border-dashed border-[rgba(34,211,238,0.22)]" />
-                            {/* Slow counter-spin ring */}
-                            <div className="animate-spin-rev absolute inset-[-40px] rounded-full border-[0.5px] border-[rgba(34,211,238,0.07)]" />
+                            {/* Spinning rings */}
+                            <div className="animate-spin-slow absolute inset-[-18px] rounded-full"
+                                style={{ border: "1.5px dashed rgba(34,211,238,0.18)" }} />
+                            <div className="animate-spin-rev absolute inset-[-40px] rounded-full"
+                                style={{ border: "0.5px solid rgba(34,211,238,0.06)" }} />
 
                             {/* Photo */}
                             <div
-                                className="relative h-full w-full overflow-hidden rounded-full bg-[#161b22]"
-                                style={{ border: "1.5px solid rgba(34,211,238,0.22)" }}
+                                className="relative h-full w-full overflow-hidden rounded-full"
+                                style={{ border: "1.5px solid rgba(34,211,238,0.2)" }}
                             >
+                                {/* Cyan top accent on avatar */}
+                                <div
+                                    className="absolute top-0 left-0 right-0 h-[2px] z-10"
+                                    style={{ background: "linear-gradient(90deg, #22d3ee, #38bdf8, transparent)" }}
+                                />
                                 <Image
                                     src="/opi.jpg"
                                     alt="Md Opi Korim — Full Stack Developer"
@@ -329,24 +360,17 @@ export default function HeroSection() {
                                 />
                             </div>
 
-                            {/* ── Desktop orbit icons (absolute, around circle) ── */}
-                            {/* Top */}
+                            {/* Orbit icons */}
                             <OrbitIcon ic={ORBIT[0]} pos={{ top: "-48px", left: "50%", transform: "translateX(-50%)" }} desktop />
-                            {/* Top-right */}
                             <OrbitIcon ic={ORBIT[1]} pos={{ top: "10px", right: "-10px" }} desktop />
-                            {/* Right */}
                             <OrbitIcon ic={ORBIT[2]} pos={{ top: "50%", right: "-54px", transform: "translateY(-50%)" }} desktop />
-                            {/* Bottom-right */}
                             <OrbitIcon ic={ORBIT[3]} pos={{ bottom: "10px", right: "-10px" }} desktop />
-                            {/* Bottom */}
                             <OrbitIcon ic={ORBIT[5]} pos={{ bottom: "10px", left: "-10px" }} desktop />
-                            {/* Left */}
                             <OrbitIcon ic={ORBIT[6]} pos={{ top: "50%", left: "-54px", transform: "translateY(-50%)" }} desktop />
-                            {/* Top-left */}
                             <OrbitIcon ic={ORBIT[7]} pos={{ top: "10px", left: "-10px" }} desktop />
                         </div>
 
-                        {/* ── Mobile orbit row — visible only on mobile ── */}
+                        {/* Mobile orbit row */}
                         <div className="flex flex-wrap justify-center gap-2 px-4 md:hidden">
                             {ORBIT.map((ic, i) => (
                                 <div
@@ -355,7 +379,7 @@ export default function HeroSection() {
                                     className="flex h-[40px] w-[40px] items-center justify-center rounded-[10px]"
                                     style={{
                                         background: ic.bg,
-                                        border: `0.5px solid ${ic.border}`,
+                                        border: `1px solid ${ic.border}`,
                                         animation: `${["floatA", "floatB", "floatC"][i % 3]} ${3.2 + i * 0.2}s ease-in-out ${i * 0.15}s infinite`,
                                     }}
                                 >
@@ -366,16 +390,27 @@ export default function HeroSection() {
 
                         {/* Name tag */}
                         <div
-                            className="rounded-[10px] bg-[#161b22] px-5 py-[10px] text-center"
-                            style={{ border: "0.5px solid #30363d" }}
+                            className="rounded-[10px] px-5 py-[10px] text-center"
+                            style={{
+                                background: "rgba(10,22,44,0.7)",
+                                border: "1px solid rgba(34,211,238,0.1)",
+                                backdropFilter: "blur(8px)",
+                            }}
                         >
                             <div
-                                className="text-[15px] font-bold text-[#e6edf3]"
+                                className="text-[15px] font-bold text-slate-200"
                                 style={{ fontFamily: "var(--font-syne)" }}
                             >
                                 Md Opi Korim
                             </div>
-                            <div className="mt-[2px] text-[11px] tracking-[0.07em] text-[#22d3ee]">
+                            <div
+                                className="mt-[2px] text-[11px] tracking-[0.07em]"
+                                style={{
+                                    background: "linear-gradient(135deg, #22d3ee, #38bdf8)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                }}
+                            >
                                 Full Stack Developer
                             </div>
                         </div>
@@ -388,20 +423,18 @@ export default function HeroSection() {
                 {...fadeIn(1.4)}
                 className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-[6px]"
             >
-                <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[#4d5566]">scroll</span>
-                {/* Animated arrow chain */}
+                <span
+                    className="text-[10px] font-mono uppercase tracking-[0.18em]"
+                    style={{ color: "rgba(34,211,238,0.3)" }}
+                >
+                    scroll
+                </span>
                 <div className="flex flex-col items-center">
                     {[0, 1, 2].map((n) => (
                         <svg
                             key={n}
-                            width="14"
-                            height="9"
-                            viewBox="0 0 14 9"
-                            fill="none"
-                            style={{
-                                animation: `scrollArrow 1.2s ease-in-out ${n * 0.18}s infinite`,
-                                opacity: 0,
-                            }}
+                            width="14" height="9" viewBox="0 0 14 9" fill="none"
+                            style={{ animation: `scrollArrow 1.2s ease-in-out ${n * 0.18}s infinite`, opacity: 0 }}
                             aria-hidden="true"
                         >
                             <path d="M1 1l6 6 6-6" stroke="#22d3ee" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -435,8 +468,9 @@ function OrbitIcon({
             style={{
                 ...pos,
                 background: ic.bg,
-                border: `0.5px solid ${ic.border}`,
-                animation: `floatA 3.4s ease-in-out infinite`,
+                border: `1px solid ${ic.border}`,
+                backdropFilter: "blur(6px)",
+                animation: "floatA 3.4s ease-in-out infinite",
             }}
         >
             {ic.icon}
@@ -445,54 +479,40 @@ function OrbitIcon({
 }
 
 // ─────────────────────────────────────────────
-// Keyframes — self-contained
+// Keyframes
 // ─────────────────────────────────────────────
 const KEYFRAMES = `
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
 
-  /* ── Grid fade overlay ── */
-  .grid-fade {
-    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
-    opacity: 0.35;
-  }
-
-  /* ── Avatar rings ── */
   .animate-spin-slow { animation: spinSlow 18s linear infinite; }
   .animate-spin-rev  { animation: spinRev  28s linear infinite; }
 
   @keyframes spinSlow { to { transform: rotate(360deg);  } }
   @keyframes spinRev  { to { transform: rotate(-360deg); } }
 
-  /* ── Orbit float ── */
   @keyframes floatA {
-    0%,100% { transform: translateY(0px);   }
-    50%      { transform: translateY(-7px);  }
+    0%,100% { transform: translateY(0px);  }
+    50%      { transform: translateY(-7px); }
   }
   @keyframes floatB {
     0%,100% { transform: translateY(0px);   }
     50%      { transform: translateY(-10px); }
   }
   @keyframes floatC {
-    0%,100% { transform: translateY(0px);   }
-    50%      { transform: translateY(-5px);  }
+    0%,100% { transform: translateY(0px);  }
+    50%      { transform: translateY(-5px); }
   }
 
-  /* Orbit icons that combine translate + float */
-  /* (We use inline animation per icon so float works with absolute positioning) */
-
-  /* ── Live dot pulse ── */
   .animate-pulse-dot { animation: pulseDot 2s ease-in-out infinite; }
   @keyframes pulseDot {
-    0%,100% { opacity: 1; transform: scale(1);   box-shadow: 0 0 0 0 rgba(34,211,238,0.5); }
-    50%      { opacity: 0.8; transform: scale(1.25); box-shadow: 0 0 0 5px rgba(34,211,238,0); }
+    0%,100% { opacity:1; transform:scale(1);    box-shadow:0 0 0 0   rgba(34,211,238,0.5); }
+    50%      { opacity:.8;transform:scale(1.25); box-shadow:0 0 0 5px rgba(34,211,238,0);   }
   }
 
-  /* ── Scroll arrows ── */
   @keyframes scrollArrow {
-    0%   { opacity: 0;   transform: translateY(-4px); }
-    40%  { opacity: 1;   transform: translateY(0);    }
-    80%  { opacity: 0;   transform: translateY(4px);  }
-    100% { opacity: 0;   transform: translateY(4px);  }
+    0%   { opacity:0; transform:translateY(-4px); }
+    40%  { opacity:1; transform:translateY(0);    }
+    80%  { opacity:0; transform:translateY(4px);  }
+    100% { opacity:0; transform:translateY(4px);  }
   }
 `;

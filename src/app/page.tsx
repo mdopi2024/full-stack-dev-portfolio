@@ -1,5 +1,6 @@
 import AboutMe from '@/components/AboutMe'
 import HeroSection from '@/components/HeroSection'
+import Projects from '@/components/Projects'
 import Skills from '@/components/Skillls'
 
 export default function page() {
@@ -8,6 +9,7 @@ export default function page() {
             <HeroSection />
             <AboutMe />
             <Skills />
+            <Projects count={4} />
         </>
     )
 }

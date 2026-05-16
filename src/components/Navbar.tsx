@@ -24,8 +24,8 @@ const LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
-    { label: "Projects", href: "#3" },
-    { label: "Contact", href: "#4" },
+    { label: "Projects", href: "#projects" },
+    { label: "Contact", href: "#contact" },
 ] as const;
 
 // ─────────────────────────────────────────────
@@ -46,7 +46,6 @@ export default function Navbar() {
 
     return (
         <>
-            {/* ── Keyframes injected once — no tailwind.config needed ── */}
             <style>{KEYFRAMES}</style>
 
             <nav
@@ -55,9 +54,17 @@ export default function Navbar() {
                     "transition-[background,border-color,box-shadow] duration-300",
                     "navbar-enter",
                     scrolled
-                        ? "bg-[rgba(13,17,23,0.38)] border-b border-[rgba(255,255,255,0.10)] shadow-[0_8px_30px_rgba(0,0,0,0.16)]"
-                        : "bg-[rgba(13,17,23,0.12)] border-b border-[rgba(255,255,255,0.04)]",
+                        ? "border-b shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+                        : "border-b",
                 ].join(" ")}
+                style={{
+                    background: scrolled
+                        ? "rgba(2,12,27,0.75)"
+                        : "rgba(2,12,27,0.35)",
+                    borderColor: scrolled
+                        ? "rgba(34,211,238,0.1)"
+                        : "rgba(34,211,238,0.05)",
+                }}
             >
                 {/* ── Main row ── */}
                 <div className="flex h-16 items-center justify-between px-[clamp(20px,4vw,52px)]">
@@ -68,11 +75,11 @@ export default function Navbar() {
                         style={{ fontFamily: "var(--font-syne)" }}
                     >
                         <Link href="/" className="no-underline">
-                            <span className="text-cyan-400">&lt;</span>
-                            <span className="text-[#e6edf3]">Opi</span>
-                            <span className="text-cyan-400">.</span>
-                            <span className="text-red-400">dev</span>
-                            <span className="text-cyan-400"> /&gt;</span>
+                            <span style={{ color: "#22d3ee" }}>&lt;</span>
+                            <span className="text-slate-200">Opi</span>
+                            <span style={{ color: "#22d3ee" }}>.</span>
+                            <span style={{ color: "#38bdf8" }}>dev</span>
+                            <span style={{ color: "#22d3ee" }}> /&gt;</span>
                         </Link>
                     </div>
 
@@ -115,15 +122,18 @@ export default function Navbar() {
                             n === 1 ? (
                                 <span
                                     key={n}
-                                    className="block h-[2px] w-[22px] rounded-[2px] bg-[#e6edf3] transition-all duration-[250ms]"
-                                    style={{ opacity: menuOpen ? 0 : 1 }}
+                                    className="block h-[2px] w-[22px] rounded-[2px] transition-all duration-[250ms]"
+                                    style={{
+                                        background: "rgba(226,232,240,0.7)",
+                                        opacity: menuOpen ? 0 : 1,
+                                    }}
                                 />
                             ) : (
                                 <span
                                     key={n}
                                     className="block h-[2px] w-[22px] rounded-[2px] transition-all duration-[250ms]"
                                     style={{
-                                        background: menuOpen ? "#22d3ee" : "#e6edf3",
+                                        background: menuOpen ? "#22d3ee" : "rgba(226,232,240,0.7)",
                                         transform: transform as string,
                                     }}
                                 />
@@ -135,11 +145,15 @@ export default function Navbar() {
                 {/* ── Mobile dropdown ── */}
                 <div
                     className={[
-                        "overflow-hidden border-t border-[rgba(255,255,255,0.05)]",
-                        "bg-[rgba(13,17,23,0.25)] backdrop-blur-2xl md:hidden",
+                        "overflow-hidden md:hidden",
                         "transition-[max-height,opacity] duration-300 ease-in-out",
                         menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0",
                     ].join(" ")}
+                    style={{
+                        borderTop: "1px solid rgba(34,211,238,0.06)",
+                        background: "rgba(2,12,27,0.88)",
+                        backdropFilter: "blur(20px)",
+                    }}
                 >
                     <div
                         className="flex flex-col px-6 pb-5 pt-4"
@@ -149,22 +163,20 @@ export default function Navbar() {
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={[
-                                    "block border-b border-[rgba(255,255,255,0.05)] py-[11px]",
-                                    "text-[15px] no-underline transition-colors duration-200 last:border-none",
-                                    pathname === link.href ? "text-cyan-400" : "text-[#8b949e]",
-                                ].join(" ")}
-                                style={
-                                    menuOpen
-                                        ? { animation: `fadeInLeft 0.25s ease-out ${i * 0.05}s both` }
-                                        : {}
-                                }
+                                className="block py-[11px] text-[15px] no-underline transition-colors duration-200 last:border-none"
+                                style={{
+                                    borderBottom: "1px solid rgba(34,211,238,0.05)",
+                                    color: pathname === link.href ? "#22d3ee" : "rgba(148,163,184,0.8)",
+                                    animation: menuOpen
+                                        ? `fadeInLeft 0.25s ease-out ${i * 0.05}s both`
+                                        : "none",
+                                }}
                             >
                                 {link.label}
                             </Link>
                         ))}
 
-                        <div className="mt-3 w-full">
+                        <div className="mt-4 w-full">
                             <HireBtn fullWidth />
                         </div>
                     </div>
@@ -175,7 +187,7 @@ export default function Navbar() {
 }
 
 // ─────────────────────────────────────────────
-// NavLink — underline slides in on hover/active
+// NavLink
 // ─────────────────────────────────────────────
 function NavLink({ label, href, active }: NavLinkProps) {
     const [hovered, setHovered] = useState(false);
@@ -186,19 +198,29 @@ function NavLink({ label, href, active }: NavLinkProps) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className="relative whitespace-nowrap text-[13.5px] tracking-[0.02em] no-underline transition-colors duration-200"
-            style={{ color: active ? "#22d3ee" : hovered ? "#e6edf3" : "#8b949e" }}
+            style={{
+                color: active
+                    ? "#22d3ee"
+                    : hovered
+                        ? "#e2e8f0"
+                        : "rgba(148,163,184,0.75)",
+            }}
         >
             {label}
+            {/* Animated underline */}
             <span
-                className="absolute -bottom-1 left-0 h-[1px] bg-cyan-400 transition-[width] duration-[250ms] ease-out"
-                style={{ width: active || hovered ? "100%" : "0%" }}
+                className="absolute -bottom-1 left-0 h-[1px] transition-[width] duration-[250ms] ease-out"
+                style={{
+                    width: active || hovered ? "100%" : "0%",
+                    background: "linear-gradient(90deg, #22d3ee, #38bdf8)",
+                }}
             />
         </Link>
     );
 }
 
 // ─────────────────────────────────────────────
-// HireBtn — shimmer sweep + pulse ring (∞)
+// HireBtn
 // ─────────────────────────────────────────────
 function HireBtn({ fullWidth = false }: HireBtnProps) {
     const [hovered, setHovered] = useState(false);
@@ -209,28 +231,30 @@ function HireBtn({ fullWidth = false }: HireBtnProps) {
             onMouseLeave={() => setHovered(false)}
             className={[
                 "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
-                "overflow-hidden rounded-[8px] border-[1.5px] border-cyan-400",
-                "px-5 py-[9px] text-[13px] font-medium tracking-[0.03em]",
-                "transition-[color,background,box-shadow] duration-300",
+                "overflow-hidden rounded-[8px]",
+                "px-5 py-[9px] text-[13px] font-semibold tracking-[0.03em]",
+                "transition-all duration-300",
                 fullWidth ? "w-full" : "",
             ].join(" ")}
             style={{
                 fontFamily: "var(--font-dm-sans)",
-                color: hovered ? "#0d1117" : "#22d3ee",
-                background: hovered ? "#22d3ee" : "transparent",
-                boxShadow: hovered ? "0 0 20px rgba(34,211,238,0.4)" : "none",
-                // pulse ring runs only when idle
-                animation: hovered ? "none" : "pulseRing 2s ease-out infinite",
+                background: hovered
+                    ? "linear-gradient(135deg, #06b6d4, #0ea5e9)"
+                    : "rgba(6,182,212,0.07)",
+                border: `1px solid ${hovered ? "transparent" : "rgba(34,211,238,0.25)"}`,
+                color: hovered ? "#020c1b" : "#22d3ee",
+                boxShadow: hovered ? "0 0 24px rgba(6,182,212,0.35)" : "none",
+                animation: hovered ? "none" : "pulseRing 2.2s ease-out infinite",
             }}
         >
-            {/* Shimmer sweep — hidden on hover */}
+            {/* Shimmer sweep */}
             {!hovered && (
                 <span
                     aria-hidden="true"
                     className="pointer-events-none absolute inset-0"
                     style={{
-                        background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent)",
-                        animation: "shimmer 2.2s ease-in-out infinite",
+                        background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent)",
+                        animation: "shimmer 2.4s ease-in-out infinite",
                     }}
                 />
             )}
@@ -239,12 +263,9 @@ function HireBtn({ fullWidth = false }: HireBtnProps) {
             <svg
                 aria-hidden="true"
                 className="relative z-10 shrink-0"
-                width="13"
-                height="13"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                viewBox="0 0 24 24"
+                width="13" height="13"
+                fill="none" stroke="currentColor"
+                strokeWidth="2.2" viewBox="0 0 24 24"
             >
                 <rect x="2" y="7" width="20" height="14" rx="2" />
                 <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
@@ -256,10 +277,9 @@ function HireBtn({ fullWidth = false }: HireBtnProps) {
 }
 
 // ─────────────────────────────────────────────
-// Keyframes — self-contained, no config needed
+// Keyframes
 // ─────────────────────────────────────────────
 const KEYFRAMES = `
-  /* ── Entry animations (run once on mount) ── */
   .navbar-enter   { animation: slideDown   0.65s cubic-bezier(0.22,1,0.36,1) both; }
   .logo-enter     { animation: fadeInLeft  0.40s ease-out 0.25s              both; }
   .cta-enter      { animation: fadeInRight 0.40s ease-out 0.55s              both; }
@@ -282,16 +302,14 @@ const KEYFRAMES = `
     to   { opacity: 1; transform: translateY(0);    }
   }
 
-  /* ── Hire Me: diagonal shimmer sweep ── */
   @keyframes shimmer {
     0%   { transform: translateX(-100%) skewX(-15deg); }
     100% { transform: translateX(350%)  skewX(-15deg); }
   }
 
-  /* ── Hire Me: expanding pulse ring ── */
   @keyframes pulseRing {
-    0%   { box-shadow: 0 0 0 0   rgba(34,211,238,0.45); }
-    70%  { box-shadow: 0 0 0 8px rgba(34,211,238,0);    }
+    0%   { box-shadow: 0 0 0 0   rgba(34,211,238,0.35); }
+    70%  { box-shadow: 0 0 0 7px rgba(34,211,238,0);    }
     100% { box-shadow: 0 0 0 0   rgba(34,211,238,0);    }
   }
 `;
