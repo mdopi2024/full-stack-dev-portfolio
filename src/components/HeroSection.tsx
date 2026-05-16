@@ -135,8 +135,7 @@ export default function HeroSection() {
             style={{ fontFamily: "var(--font-dm-sans)" }}
         >
             {/* ── Two-column grid ── */}
-            <div className="relative z-10 grid min-h-screen grid-cols-1 items-center gap-10 px-[clamp(20px,5vw,52px)] pt-[100px] pb-[80px] md:grid-cols-2 md:gap-16 md:pt-[90px]">
-
+            <div className="relative z-10 grid min-h-screen grid-cols-1 items-center gap-10 px-[clamp(20px,5vw,52px)] pt-[100px]  md:grid-cols-2 md:gap-16 md:pt-[90px]">
                 {/* LEFT COLUMN */}
                 <div className="flex flex-col">
 

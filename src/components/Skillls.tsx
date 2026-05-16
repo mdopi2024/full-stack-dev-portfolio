@@ -39,7 +39,7 @@ export default function SkillsSection() {
     return (
         <section
             id="skills"
-            className="relative w-full py-24 px-4 sm:px-6 overflow-hidden text-white"
+            className="relative w-full pt-18 px-4 sm:px-6 overflow-hidden text-white"
         >
             <div className="relative max-w-6xl mx-auto">
 
