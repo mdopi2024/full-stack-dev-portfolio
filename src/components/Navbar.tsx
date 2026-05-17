@@ -226,53 +226,55 @@ function HireBtn({ fullWidth = false }: HireBtnProps) {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <button
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className={[
-                "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
-                "overflow-hidden rounded-[8px]",
-                "px-5 py-[9px] text-[13px] font-semibold tracking-[0.03em]",
-                "transition-all duration-300",
-                fullWidth ? "w-full" : "",
-            ].join(" ")}
-            style={{
-                fontFamily: "var(--font-dm-sans)",
-                background: hovered
-                    ? "linear-gradient(135deg, #06b6d4, #0ea5e9)"
-                    : "rgba(6,182,212,0.07)",
-                border: `1px solid ${hovered ? "transparent" : "rgba(34,211,238,0.25)"}`,
-                color: hovered ? "#020c1b" : "#22d3ee",
-                boxShadow: hovered ? "0 0 24px rgba(6,182,212,0.35)" : "none",
-                animation: hovered ? "none" : "pulseRing 2.2s ease-out infinite",
-            }}
-        >
-            {/* Shimmer sweep */}
-            {!hovered && (
-                <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                        background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent)",
-                        animation: "shimmer 2.4s ease-in-out infinite",
-                    }}
-                />
-            )}
-
-            {/* Briefcase icon */}
-            <svg
-                aria-hidden="true"
-                className="relative z-10 shrink-0"
-                width="13" height="13"
-                fill="none" stroke="currentColor"
-                strokeWidth="2.2" viewBox="0 0 24 24"
+        <Link href="/#contactSection">
+            <button
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+                className={[
+                    "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
+                    "overflow-hidden rounded-[8px]",
+                    "px-5 py-[9px] text-[13px] font-semibold tracking-[0.03em]",
+                    "transition-all duration-300",
+                    fullWidth ? "w-full" : "",
+                ].join(" ")}
+                style={{
+                    fontFamily: "var(--font-dm-sans)",
+                    background: hovered
+                        ? "linear-gradient(135deg, #06b6d4, #0ea5e9)"
+                        : "rgba(6,182,212,0.07)",
+                    border: `1px solid ${hovered ? "transparent" : "rgba(34,211,238,0.25)"}`,
+                    color: hovered ? "#020c1b" : "#22d3ee",
+                    boxShadow: hovered ? "0 0 24px rgba(6,182,212,0.35)" : "none",
+                    animation: hovered ? "none" : "pulseRing 2.2s ease-out infinite",
+                }}
             >
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
-            </svg>
+                {/* Shimmer sweep */}
+                {!hovered && (
+                    <span
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-0"
+                        style={{
+                            background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent)",
+                            animation: "shimmer 2.4s ease-in-out infinite",
+                        }}
+                    />
+                )}
 
-            <span className="relative z-10">Hire Me</span>
-        </button>
+                {/* Briefcase icon */}
+                <svg
+                    aria-hidden="true"
+                    className="relative z-10 shrink-0"
+                    width="13" height="13"
+                    fill="none" stroke="currentColor"
+                    strokeWidth="2.2" viewBox="0 0 24 24"
+                >
+                    <rect x="2" y="7" width="20" height="14" rx="2" />
+                    <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
+                </svg>
+
+                <span className="relative z-10">Hire Me</span>
+            </button>
+        </Link>
     );
 }
 

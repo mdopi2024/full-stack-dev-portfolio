@@ -31,7 +31,7 @@ export default function ContactSection() {
     };
 
     return (
-        <section id="contact" className="relative w-full  pb-16 sm:px-6 text-white overflow-hidden">
+        <section id="contactSection" className="relative w-full  pb-16 sm:px-6 text-white overflow-hidden">
             <div className="relative max-w-6xl mx-auto">
 
                 {/* Header */}
