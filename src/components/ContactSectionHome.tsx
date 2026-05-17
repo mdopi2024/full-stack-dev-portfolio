@@ -93,7 +93,7 @@ export default function ContactSection() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="flex flex-col  gap-8"
+                        className="flex flex-col gap-8 pl-5 md:pl-0 lg:pl-0  "
                     >
                         <div>
                             <h3 className="text-2xl font-bold text-slate-100 mb-3">
@@ -108,7 +108,7 @@ export default function ContactSection() {
                         <div className="flex flex-col gap-5">
                             {[
                                 { icon: <Mail size={16} />, text: "opikorim86@gmail.com" },
-                                { icon: <Phone size={16} />, text: "+880 1234-567890" },
+                                { icon: <Phone size={16} />, text: "+880 1910-277586" },
                                 { icon: <MapPin size={16} />, text: "Dhaka, Bangladesh" },
                             ].map((item, i) => (
                                 <div key={i} className="flex items-center gap-3">
