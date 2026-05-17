@@ -1,29 +1,34 @@
 // utils/sendEmail.ts
-
 import emailjs from "@emailjs/browser";
-import React from "react";
+import { toast } from "sonner";
 
 export const handleSendMessage = async (
     e: React.FormEvent<HTMLFormElement>
 ) => {
     e.preventDefault();
 
+    // ⚠️ Save currentTarget BEFORE any await — React nullifies the synthetic
+    // event after the first await, so e.currentTarget becomes null otherwise.
+    const form = e.currentTarget;
+
+    const toastId = toast.loading("Sending message...");
     try {
         await emailjs.sendForm(
             "service_3df9qqj",
             "template_nloykpm",
-            e.currentTarget,
+            form,                   // ← use saved ref, not e.currentTarget
             "Q9d3XCSKak1DDPg6C"
         );
 
-        alert("Message sent successfully!");
+        toast.success("Message sent!", {
+            description: "I'll get back to you as soon as possible.",
+            duration: 4000,
+            id: toastId,
+        });
 
-        e.currentTarget.reset();
-    } catch (error: any) {
-        console.log("Full error object:", error);
-        console.log("Error JSON:", JSON.stringify(error, null, 2));
-        console.log("Error message:", error?.text || error?.message);
+        form.reset();               // ← use saved ref here too
 
-        alert("Failed to send message");
+    } catch (error) {
+        toast.error("Failed to send message", { id: toastId });
     }
-}
+};
