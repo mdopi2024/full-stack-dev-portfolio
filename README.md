@@ -1,7 +1,7 @@
 <!-- Midnight Cyan,Sharp, techy, minimal
 
 #0b121a → #00e5ff → #ffffff -->
-```md id="8kq1pw"
+
 # Md Opi Korim
 
 ### Full Stack Developer
