@@ -2,11 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-// ─────────────────────────────────────────────
-// Types
-// ─────────────────────────────────────────────
 interface NavLinkProps {
     label: string;
     href: string;
@@ -17,9 +14,6 @@ interface HireBtnProps {
     fullWidth?: boolean;
 }
 
-// ─────────────────────────────────────────────
-// Constants
-// ─────────────────────────────────────────────
 const LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -28,9 +22,6 @@ const LINKS = [
     { label: "Contact", href: "/contact" },
 ] as const;
 
-// ─────────────────────────────────────────────
-// Navbar
-// ─────────────────────────────────────────────
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
@@ -58,15 +49,11 @@ export default function Navbar() {
                         : "border-b",
                 ].join(" ")}
                 style={{
-                    background: scrolled
-                        ? "rgba(2,12,27,0.75)"
-                        : "rgba(2,12,27,0.35)",
-                    borderColor: scrolled
-                        ? "rgba(34,211,238,0.1)"
-                        : "rgba(34,211,238,0.05)",
+                    background: scrolled ? "rgba(2,12,27,0.75)" : "rgba(2,12,27,0.35)",
+                    borderColor: scrolled ? "rgba(34,211,238,0.1)" : "rgba(34,211,238,0.05)",
                 }}
             >
-                {/* ── Main row ── */}
+                {/* Main row */}
                 <div className="flex h-16 items-center justify-between px-[clamp(20px,4vw,52px)]">
 
                     {/* Logo */}
@@ -123,10 +110,7 @@ export default function Navbar() {
                                 <span
                                     key={n}
                                     className="block h-[2px] w-[22px] rounded-[2px] transition-all duration-[250ms]"
-                                    style={{
-                                        background: "rgba(226,232,240,0.7)",
-                                        opacity: menuOpen ? 0 : 1,
-                                    }}
+                                    style={{ background: "rgba(226,232,240,0.7)", opacity: menuOpen ? 0 : 1 }}
                                 />
                             ) : (
                                 <span
@@ -142,7 +126,7 @@ export default function Navbar() {
                     </button>
                 </div>
 
-                {/* ── Mobile dropdown ── */}
+                {/* Mobile dropdown */}
                 <div
                     className={[
                         "overflow-hidden md:hidden",
@@ -155,10 +139,7 @@ export default function Navbar() {
                         backdropFilter: "blur(20px)",
                     }}
                 >
-                    <div
-                        className="flex flex-col px-6 pb-5 pt-4"
-                        style={{ fontFamily: "var(--font-dm-sans)" }}
-                    >
+                    <div className="flex flex-col px-6 pb-5 pt-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
                         {LINKS.map((link, i) => (
                             <Link
                                 key={link.href}
@@ -167,15 +148,12 @@ export default function Navbar() {
                                 style={{
                                     borderBottom: "1px solid rgba(34,211,238,0.05)",
                                     color: pathname === link.href ? "#22d3ee" : "rgba(148,163,184,0.8)",
-                                    animation: menuOpen
-                                        ? `fadeInLeft 0.25s ease-out ${i * 0.05}s both`
-                                        : "none",
+                                    animation: menuOpen ? `fadeInLeft 0.25s ease-out ${i * 0.05}s both` : "none",
                                 }}
                             >
                                 {link.label}
                             </Link>
                         ))}
-
                         <div className="mt-4 w-full">
                             <HireBtn fullWidth />
                         </div>
@@ -186,9 +164,7 @@ export default function Navbar() {
     );
 }
 
-// ─────────────────────────────────────────────
-// NavLink
-// ─────────────────────────────────────────────
+// ─── NavLink ──────────────────────────────────────────────────────────────────
 function NavLink({ label, href, active }: NavLinkProps) {
     const [hovered, setHovered] = useState(false);
 
@@ -198,16 +174,9 @@ function NavLink({ label, href, active }: NavLinkProps) {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             className="relative whitespace-nowrap text-[13.5px] tracking-[0.02em] no-underline transition-colors duration-200"
-            style={{
-                color: active
-                    ? "#22d3ee"
-                    : hovered
-                        ? "#e2e8f0"
-                        : "rgba(148,163,184,0.75)",
-            }}
+            style={{ color: active ? "#22d3ee" : hovered ? "#e2e8f0" : "rgba(148,163,184,0.75)" }}
         >
             {label}
-            {/* Animated underline */}
             <span
                 className="absolute -bottom-1 left-0 h-[1px] transition-[width] duration-[250ms] ease-out"
                 style={{
@@ -219,68 +188,74 @@ function NavLink({ label, href, active }: NavLinkProps) {
     );
 }
 
-// ─────────────────────────────────────────────
-// HireBtn
-// ─────────────────────────────────────────────
+// ─── HireBtn ──────────────────────────────────────────────────────────────────
 function HireBtn({ fullWidth = false }: HireBtnProps) {
     const [hovered, setHovered] = useState(false);
+    const pathname = usePathname();
+    const router = useRouter();
+
+    const handleHireClick = () => {
+        if (pathname === "/") {
+            // Already on home — just smooth-scroll to the section
+            const el = document.getElementById("contactSection");
+            if (el) {
+                el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        } else {
+            // Navigate to home, then scroll after the page loads
+            router.push("/#contactSection");
+        }
+    };
 
     return (
-        <Link href="/#contactSection">
-            <button
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                className={[
-                    "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
-                    "overflow-hidden rounded-[8px]",
-                    "px-5 py-[9px] text-[13px] font-semibold tracking-[0.03em]",
-                    "transition-all duration-300",
-                    fullWidth ? "w-full" : "",
-                ].join(" ")}
-                style={{
-                    fontFamily: "var(--font-dm-sans)",
-                    background: hovered
-                        ? "linear-gradient(135deg, #06b6d4, #0ea5e9)"
-                        : "rgba(6,182,212,0.07)",
-                    border: `1px solid ${hovered ? "transparent" : "rgba(34,211,238,0.25)"}`,
-                    color: hovered ? "#020c1b" : "#22d3ee",
-                    boxShadow: hovered ? "0 0 24px rgba(6,182,212,0.35)" : "none",
-                    animation: hovered ? "none" : "pulseRing 2.2s ease-out infinite",
-                }}
-            >
-                {/* Shimmer sweep */}
-                {!hovered && (
-                    <span
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0"
-                        style={{
-                            background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent)",
-                            animation: "shimmer 2.4s ease-in-out infinite",
-                        }}
-                    />
-                )}
-
-                {/* Briefcase icon */}
-                <svg
+        <button
+            onClick={handleHireClick}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={[
+                "relative inline-flex cursor-pointer items-center justify-center gap-[7px]",
+                "overflow-hidden rounded-[8px]",
+                "px-5 py-[9px] text-[13px] font-semibold tracking-[0.03em]",
+                "transition-all duration-300",
+                fullWidth ? "w-full" : "",
+            ].join(" ")}
+            style={{
+                fontFamily: "var(--font-dm-sans)",
+                background: hovered ? "linear-gradient(135deg, #06b6d4, #0ea5e9)" : "rgba(6,182,212,0.07)",
+                border: `1px solid ${hovered ? "transparent" : "rgba(34,211,238,0.25)"}`,
+                color: hovered ? "#020c1b" : "#22d3ee",
+                boxShadow: hovered ? "0 0 24px rgba(6,182,212,0.35)" : "none",
+                animation: hovered ? "none" : "pulseRing 2.2s ease-out infinite",
+            }}
+        >
+            {!hovered && (
+                <span
                     aria-hidden="true"
-                    className="relative z-10 shrink-0"
-                    width="13" height="13"
-                    fill="none" stroke="currentColor"
-                    strokeWidth="2.2" viewBox="0 0 24 24"
-                >
-                    <rect x="2" y="7" width="20" height="14" rx="2" />
-                    <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
-                </svg>
+                    className="pointer-events-none absolute inset-0"
+                    style={{
+                        background: "linear-gradient(90deg, transparent, rgba(34,211,238,0.12), transparent)",
+                        animation: "shimmer 2.4s ease-in-out infinite",
+                    }}
+                />
+            )}
 
-                <span className="relative z-10">Hire Me</span>
-            </button>
-        </Link>
+            <svg
+                aria-hidden="true"
+                className="relative z-10 shrink-0"
+                width="13" height="13"
+                fill="none" stroke="currentColor"
+                strokeWidth="2.2" viewBox="0 0 24 24"
+            >
+                <rect x="2" y="7" width="20" height="14" rx="2" />
+                <path d="M16 3H8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z" />
+            </svg>
+
+            <span className="relative z-10">Hire Me</span>
+        </button>
     );
 }
 
-// ─────────────────────────────────────────────
-// Keyframes
-// ─────────────────────────────────────────────
+// ─── Keyframes ────────────────────────────────────────────────────────────────
 const KEYFRAMES = `
   .navbar-enter   { animation: slideDown   0.65s cubic-bezier(0.22,1,0.36,1) both; }
   .logo-enter     { animation: fadeInLeft  0.40s ease-out 0.25s              both; }
