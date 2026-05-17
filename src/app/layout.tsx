@@ -30,6 +30,9 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Md Opi Korim | Full Stack Developer",
   description: "Full Stack Developer portfolio — React, Next.js, Node.js, TypeScript and more.",
+  icons: {
+    icon: "/favIcon/favicon.png",
+  },
 };
 
 export default function RootLayout({
