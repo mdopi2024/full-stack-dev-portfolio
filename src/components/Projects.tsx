@@ -40,39 +40,7 @@ const ALL_PROJECTS: Project[] = [
         backendRepo: "https://github.com/mdopi2024/B6A4-LUXEBUTE--SERVER",
         liveDemo: "https://b6-a4-frontend-client.vercel.app",
     },
-    {
-        id: 3,
-        title: "Agri-Food Corporate",
-        description:
-            "Corporate website for an Algerian agri-food distributor, focused on trust-building through clear structure, strong visuals, and intuitive navigation.",
-        image: "/projects/agrifood.png",
-        tags: ["Next.js", "Sanity CMS", "GSAP"],
-        frontendRepo: "https://github.com",
-        backendRepo: "https://github.com",
-        liveDemo: "https://example.com",
-    },
-    {
-        id: 4,
-        title: "Real-time Analytics",
-        description:
-            "High-performance analytics dashboard with live data streaming, interactive charts, and role-based access control for enterprise teams.",
-        image: "/projects/analytics.png",
-        tags: ["Vue 3", "FastAPI", "Redis"],
-        frontendRepo: "https://github.com",
-        backendRepo: "https://github.com",
-        liveDemo: "https://example.com",
-    },
-    {
-        id: 5,
-        title: "Social Learning App",
-        description:
-            "Collaborative learning platform where students share notes, join study rooms, and track progress with gamified milestones.",
-        image: "/projects/learning.png",
-        tags: ["React Native", "GraphQL", "Postgres"],
-        frontendRepo: "https://github.com",
-        backendRepo: "https://github.com",
-        liveDemo: "https://example.com",
-    },
+
 ];
 
 // ─── Icons ────────────────────────────────────────────────────────────────────

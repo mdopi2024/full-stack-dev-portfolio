@@ -14,7 +14,7 @@ const LINKS = [
 
 const SOCIALS = [
     { icon: SiGithub, href: "https://github.com/mdopi2024", label: "GitHub" },
-    { icon: SiFacebook, href: "https://www.facebook.com/home.php", label: "Facebook" },
+    { icon: SiFacebook, href: "https://www.facebook.com/md.opi.185576", label: "Facebook" },
 ];
 
 export default function Footer() {
