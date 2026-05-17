@@ -1,9 +1,9 @@
-import React from 'react'
+import Contact from '@/components/contact/Cotact'
 
 export default function ContackPage() {
     return (
         <div>
-            <h1>hello i am contact page</h1>
+            <Contact />
         </div>
     )
 }
